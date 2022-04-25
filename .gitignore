@@ -1,0 +1,10 @@
+# Binaries
+asm/asm
+corewar/corewar
+
+# Useless files
+*~
+*#
+*.o
+*.a
+*.pdf
