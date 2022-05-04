@@ -21,19 +21,61 @@ void usage(void)
 
 void error(int ac, char **av)
 {
-    if (ac == 1) {
-        usage();
-        exit(84);
+    if (ac == 1)
+        usage(), exit(84);
+    for (int i = 1; i < ac; i++) {
+        if (av[i][my_strlen(av[i]) - 1] != 's'
+        || av[i][my_strlen(av[i]) - 2] != '.')
+            my_putstr_error("Bad file extension : need .s\n");
     }
+}
+
+int my_size(char *pathname)
+{
+    FILE *file = fopen(pathname, "r");
+
+    if (file == NULL)
+        return (-1);
+
+    fseek(file, 0, SEEK_END);
+
+    int size = ftell(file);
+
+    fclose(file);
+
+    return (size);
+}
+
+void analyse_champions(char *path)
+{
+    int fd = open(path, O_RDONLY);
+    if (fd == -1) {
+        my_putstr_error("Can't open file: ");
+        write(2, path, my_strlen(path));
+        my_putstr_error("\n");
+        close(fd); return;
+    }
+    close(fd);
+    char *buffer = malloc(sizeof(char) * my_size(path));
+    read(fd, buffer, my_size(path));
+
+    free(buffer);
+}
+
+void avengers_assemble(int ac, char **av)
+{
+    for (int i = 1; i < ac; i++)
+        analyse_champions(av[i]);
 }
 
 int main(int ac, char **av)
 {
-    error(ac, av);
     if ((ac == 2)
     && (!(my_strcmp(av[1], "-h")) || !(my_strcmp(av[1], "--help")))) {
         usage();
         exit(0);
     }
+    error(ac, av);
+    avengers_assemble(ac, av);
     return (0);
 }

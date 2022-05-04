@@ -8,6 +8,7 @@
 NAME	=	asm
 
 SRC	=	src/main.c	\
+		src/op.c	\
 
 OBJ	=	$(SRC:.c=.o)
 

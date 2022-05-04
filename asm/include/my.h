@@ -5,6 +5,7 @@
 ** Header file for the library
 */
 
+#include <fcntl.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
