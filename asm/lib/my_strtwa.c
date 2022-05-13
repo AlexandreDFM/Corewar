@@ -1,60 +1,70 @@
 /*
-** EPITECH PROJECT, 2022
-** my_strtwa
+** EPITECH PROJECT, 2021
+** MY_STR_TO_WORD_ARRAY
 ** File description:
-** Function to reproduce strtok but output is double array
+** task04 day08
 */
 
 #include "../include/proto.h"
 
-int test_lim(char c, char *limit)
+int delim(char c, char const *str)
 {
-    for (int i = 0; limit[i] != '\0'; i++) {
-        if (c == limit[i]) {
-            return 1;
-        }
+    int i = 0;
+    while (str[i]) {
+        if (c == str[i])
+            return (1);
+        i++;
     }
-    return 0;
+    return (0);
 }
 
-int nb_not_valid(char const *str, char *limit)
+int word_len(char *str, char *delims, int i)
 {
-    int nby = 0;
-    for (int i = 0; str[i] != '\0'; i++) {
-        if (test_lim(str[i], limit))
-            nby += 1;
+    int len = 0;
+    while (str[i] != '\0' && delim(str[i], delims) == 0) {
+        i++;
+        len++;
     }
-    return nby;
+    return (len);
 }
 
-char **my_alloc_array(char const *str, char *limit, char **dest)
+int count_words(char *str, char *delims)
 {
-    int nby = 0, nbx = 0;
-    int len = my_strlen(str);
-    for (int nbc = 0; nbc < len; nbc++, nbx++) {
-        if (test_lim(str[nbc], limit)) {
-            dest[nby] = malloc(sizeof(char) * (nbx + 1));
-            dest[nby][nbx] = '\0';
-            nby += 1, nbx = 0, nbc++;
-        }
-        if (nbc >= len) break;
+    int count = 2;
+    int i = 0;
+    while (str[i] != '\0') {
+        if (delim(str[i], delims) && delim(str[i + 1], delims) == 0)
+            count++;
+        i++;
     }
-    return dest;
+    return (count);
 }
 
-char **my_strtwa(char const *str, char *limit)
+char **boucle_array(int i, char *str, char *delims, char **array)
 {
-    int nbmax = (nb_not_valid(str, limit)), nby = 0, nbx = 0;
-    char **dest = malloc(sizeof(char *) * (nbmax + 1));
-    dest[nbmax] = NULL;
-    dest = my_alloc_array(str, limit, dest);
-    for (int nbc = 0; nby < nbmax; nbc++, nbx++) {
-        if (test_lim(str[nbc], limit)) {
-            dest[nby][nbx] = '\0';
-            nbx = 0, nby += 1, nbc++;
+    int len = 0, j = 0, k = 0;
+    while (str[i] != '\0') {
+        if (delim(str[i], delims)) {
+            i++;
+            continue;
         }
-        if (nby == nbmax) break;
-        dest[nby][nbx] = str[nbc];
+        len = word_len(str, delims, i);
+        array[j] = malloc(sizeof(char) * (len + 1));
+        for (k = 0; k != len; k++, i++)
+            array[j][k] = str[i];
+        array[j][k] = '\0';
+        j++;
+        if (str[i] == '\0') break;
+        i++;
     }
-    return dest;
+    array[j] = NULL;
+    return (array);
+}
+
+char **my_strtwa(char *str, char *delims)
+{
+    int i = 0;
+    char **array = malloc(sizeof(char *) * count_words(str, delims));
+    boucle_array(i, str, delims, array);
+    return (array);
 }
