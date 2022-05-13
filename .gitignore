@@ -2,6 +2,10 @@
 asm/asm
 corewar/corewar
 
+# ASM
+*.cor
+*.s
+
 # Useless files
 *~
 *#
