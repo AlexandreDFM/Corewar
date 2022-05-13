@@ -22,12 +22,16 @@ char *core_header(char *str)
     return(my_strcpy(malloc(sizeof(char) * (my_strlen(tmp) + 1)), tmp));
 }
 
-// void find_commands(char *str, t_core *core)
-// {
-//     t_commands *command = NULL;
-//     command->next = NULL;
-//     for (; )
-// }
+void find_commands(char *str, t_core *core)
+{
+    t_commands *command = NULL;
+    for (int i = 0; op_tab[i].mnemonique != NULL; i++) {
+        if (my_strstr(str, op_tab[i].mnemonique) != NULL) {
+            create_commands(str[i]);
+        }
+        push
+    }
+}
 
 void encode_champion(char *buffer, char *fighter)
 {
@@ -38,8 +42,8 @@ void encode_champion(char *buffer, char *fighter)
             core->name = core_header(array[i]);
         else if (my_strstr(array[i], COMMENT_CMD_STRING))
             core->comment = core_header(array[i]);
-        // else
-        //     find_commands(array[i]);
+        else
+            find_commands(array[i], core);
     }
     free_array(array);
     // CREATING THE .cor FILE
