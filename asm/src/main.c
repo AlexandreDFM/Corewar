@@ -30,6 +30,13 @@ void error(int ac, char **av)
     }
 }
 
+char *create_fighter(char *p)
+{
+    for (int i = 0, j = 1; p[i++]; j++) if (p[i] == '/') p += j, j = 1, i = 0;
+    char *xd = my_strcat(my_revstr(my_strstr(my_revstr(++p), ".")), "cor");
+    return (my_strcpy(malloc(sizeof(char) * (my_strlen(xd) + 1)), xd));
+}
+
 void analyse_champions(char *path)
 {
     int fd = open(path, O_RDONLY);
@@ -41,16 +48,8 @@ void analyse_champions(char *path)
     }
     close(fd);
     char *buffer = open_file(path, len_file(path));
-    char *revpath = my_revstr(path);
-    int i = 0;
-    for (; revpath[i] != '/' && revpath[i] != '\0'; i++);
-    char *fighter = malloc(sizeof(char) * (my_strlen(revpath) - i));
-    my_strncpy(fighter, revpath, i);
-    fighter += 2;
-    fighter = my_revstr(fighter);
-    // fighter = my_strcat(fighter, ".cor");
-    my_putstr(fighter);
-    encod_hexa(buffer, fighter);
+    char *fighter = create_fighter(path);
+    encode_champion(buffer, fighter);
     free(buffer);
 }
 

@@ -9,7 +9,7 @@ NAME	=	asm
 
 SRC	=	src/main.c	\
 		src/op.c	\
-		src/boostrap_encod.c	\
+		src/encoder.c	\
 
 OBJ	=	$(SRC:.c=.o)
 

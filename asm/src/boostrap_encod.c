@@ -71,3 +71,4 @@ void encod_hexa(char *file, char *filename)
     close(fd);
     my_free_array(f);
 }
+
