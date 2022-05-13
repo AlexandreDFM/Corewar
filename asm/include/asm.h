@@ -16,7 +16,7 @@ typedef enum VarType {
     INT = 4,
 } e_var;
 
-typedef enum ChampionsType {
+typedef enum CommandType {
     LIVE = 1,
     LD = 2,
     ST = 3,
@@ -33,30 +33,22 @@ typedef enum ChampionsType {
     LLDI = 14,
     LFORK = 15,
     AFF = 16,
-} e_champions;
+} e_command;
 
-typedef struct Arguments {
+typedef struct arguments {
     char type[MAX_ARGS_NUMBER];
     char *argv[MAX_ARGS_NUMBER];
 } t_args;
 
-typedef struct Commands {
-    struct Commands *next;
-    t_args arguments;
-    char *binary;
-    char *line;
-    int binary_size;
-    char command_code;
+typedef struct commands {
+    struct commands *next;
+    op_t *op;
 } t_commands;
 
-
 typedef struct core {
-    e_var t;
-    int size;
-    char operator;
-    void *data1;
-    void *data2;
-    struct core *next;
+    char *name;
+    char *comment;
+    t_commands *commands;
 } t_core;
 
 typedef struct parse {
@@ -65,5 +57,6 @@ typedef struct parse {
 } t_parse;
 
 void encod_hexa(char *file, char *filename);
+void encode_champion(char *buffer, char *fighter);
 
 #endif /* ASM_H_ */

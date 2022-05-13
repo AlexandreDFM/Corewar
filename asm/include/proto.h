@@ -26,11 +26,13 @@ int check_char(char c, char *presence);
 int pos_char(char *string, char *presence);
 int check_string(char *string, char *presence);
 int test_delim(char c, char *delim);
+char **my_strtwa(char *str, char *delims);
 
 unsigned char *my_read_bytes(char *path, int size_of_read);
 
 char *my_revstr(char *str);
 char *my_strcat(char *dest, const char *src);
+char *my_strcpy(char *dest, char const *src);
 char *my_strncpy(char *dest, char const *src, int n);
 char *open_file(char *path, int size);
 char *my_strdup_value(char *src, int value);
@@ -38,9 +40,10 @@ char *my_strdup_to_char(char *src, char *delim);
 char *left_slice(char *strslice, char *new_array, int i, int j);
 char *right_slice(char *strslice, char *new_array, int i, int j);
 char *my_slice_array(int direction, char *strslice, int nbslice);
+char *my_strstr(char *str, char *to_find);
 
-char **my_strtwa(char const *str, char *limit);
 
+void free_array(char **array);
 void my_putstr(char const *str);
 void my_putstr_error(char const *str);
 void my_free_array(char **array);
