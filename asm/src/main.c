@@ -41,9 +41,16 @@ void analyse_champions(char *path)
     }
     close(fd);
     char *buffer = open_file(path, len_file(path));
-
-    // PROCESS
-
+    char *revpath = my_revstr(path);
+    int i = 0;
+    for (; revpath[i] != '/' && revpath[i] != '\0'; i++);
+    char *fighter = malloc(sizeof(char) * (my_strlen(revpath) - i));
+    my_strncpy(fighter, revpath, i);
+    fighter += 2;
+    fighter = my_revstr(fighter);
+    // fighter = my_strcat(fighter, ".cor");
+    my_putstr(fighter);
+    encod_hexa(buffer, fighter);
     free(buffer);
 }
 

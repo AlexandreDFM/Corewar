@@ -9,6 +9,7 @@ NAME	=	asm
 
 SRC	=	src/main.c	\
 		src/op.c	\
+		src/boostrap_encod.c	\
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -30,7 +31,7 @@ all	:	$(NAME)
 
 clean	:
 	make clean -C lib/
-	$(RM) $(OBJ) *~ *# vgcore*
+	$(RM) $(OBJ) *~ *# vgcore* *.cor
 
 fclean	:	clean
 	make fclean -C lib/
