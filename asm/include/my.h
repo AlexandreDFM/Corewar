@@ -14,8 +14,11 @@
 #ifndef MY_H_
     #define MY_H_
 
-int my_strcmp(char const *s1, char const *s2);
+int len_file(char *path);
 int my_strlen(char const *str);
+int my_strcmp(char const *s1, char const *s2);
+
+char *open_file(char *path, int size);
 
 void my_putstr(char const *str);
 void my_putstr_error(char const *str);
