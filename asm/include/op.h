@@ -25,7 +25,7 @@
 // regs
 #define REG_NUMBER  16              /* r1 <--> rx */
 
-typedef char    args_type_t;
+typedef char args_type_t;
 
 #define T_REG   1       /* register */
 #define T_DIR   2       /* direct  (ld  #1,r1  put 1 into r1) */
@@ -42,7 +42,7 @@ struct op_s
     char *comment;
 };
 
-typedef struct op_s     op_t;
+typedef struct op_s op_t;
 
 // size (in bytes)
 #define IND_SIZE    2
