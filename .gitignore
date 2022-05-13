@@ -5,6 +5,7 @@ corewar/corewar
 # ASM
 *.cor
 *.s
+asm/champions/
 
 # Useless files
 *~
