@@ -5,7 +5,7 @@
 ** Function opening a file in a buffer
 */
 
-#include "../include/my.h"
+#include "../include/proto.h"
 
 int len_file(char *path)
 {

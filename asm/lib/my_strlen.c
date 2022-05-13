@@ -5,7 +5,7 @@
 ** Function that returns the length of a string
 */
 
-#include "../include/my.h"
+#include "../include/proto.h"
 
 int my_strlen(char const *str)
 {
