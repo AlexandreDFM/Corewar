@@ -30,34 +30,19 @@ void error(int ac, char **av)
     }
 }
 
-int my_size(char *pathname)
-{
-    FILE *file = fopen(pathname, "r");
-
-    if (file == NULL)
-        return (-1);
-
-    fseek(file, 0, SEEK_END);
-
-    int size = ftell(file);
-
-    fclose(file);
-
-    return (size);
-}
-
 void analyse_champions(char *path)
 {
     int fd = open(path, O_RDONLY);
     if (fd == -1) {
         my_putstr_error("Can't open file: ");
-        write(2, path, my_strlen(path));
+        my_putstr_error(path);
         my_putstr_error("\n");
         close(fd); return;
     }
     close(fd);
-    char *buffer = malloc(sizeof(char) * my_size(path));
-    read(fd, buffer, my_size(path));
+    char *buffer = open_file(path, len_file(path));
+
+    // PROCESS
 
     free(buffer);
 }
