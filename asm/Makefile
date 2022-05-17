@@ -12,6 +12,8 @@ SRC	=	src/main.c				\
 		src/encoder.c			\
 		src/commands_utils.c	\
 		src/write_file.c		\
+		src/command_manager.c	\
+		src/create_ll.c			\
 
 OBJ	=	$(SRC:.c=.o)
 

@@ -43,9 +43,8 @@ typedef struct arguments {
 typedef struct counter {
     struct counter *next;
     int sizeline;
-    char *command;
+    op_t *command;
 } t_counter;
-
 
 typedef struct commands {
     struct commands *next;
@@ -69,5 +68,11 @@ void encode_champion(char *buffer, char *fighter);
 
 void write_file(t_core *core, char *fighter);
 void push_back_commands(t_commands *head, t_commands *node);
+void push_back_counter(t_counter *head, t_counter *node);
+
+t_commands *find_commands(char *str);
+t_commands *create_command(op_t *op);
+t_counter *create_counter(op_t *command, int sizeline);
+void swapnodes(t_counter **head, int x, int y);
 
 #endif /* ASM_H_ */
