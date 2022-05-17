@@ -50,7 +50,7 @@ void analyse_champions(char *path)
     char *buffer = open_file(path, len_file(path));
     char *fighter = create_fighter(path);
     encode_champion(buffer, fighter);
-    free(buffer);
+    free(buffer); free(fighter);
 }
 
 void avengers_assemble(int ac, char **av)

@@ -48,6 +48,7 @@ void my_putstr(char const *str);
 void my_putstr_error(char const *str);
 void my_free_array(char **array);
 void my_memcpy(void *dest, const void *src, size_t n);
+void my_strtrim(char *str);
 
 #endif /* !MY_H_ */
 
