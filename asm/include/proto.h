@@ -19,6 +19,7 @@ int count_int_read(char *mappath);
 int len_file(char *path);
 int my_atoi(char const *str);
 int my_strlen(char const *str);
+int my_tablen(char **array);
 int my_strcmp(char const *s1, char const *s2);
 int my_strncmp(char const *s1, char const *s2, int n);
 int count_char(char *string, char c);
@@ -26,7 +27,6 @@ int check_char(char c, char *presence);
 int pos_char(char *string, char *presence);
 int check_string(char *string, char *presence);
 int test_delim(char c, char *delim);
-char **my_strtwa(char *str, char *delims);
 
 unsigned char *my_read_bytes(char *path, int size_of_read);
 
@@ -42,6 +42,7 @@ char *right_slice(char *strslice, char *new_array, int i, int j);
 char *my_slice_array(int direction, char *strslice, int nbslice);
 char *my_strstr(char *str, char *to_find);
 
+char **my_strtwa(char *str, char *delims);
 
 void free_array(char **array);
 void my_putstr(char const *str);
