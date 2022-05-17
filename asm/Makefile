@@ -7,9 +7,11 @@
 
 NAME	=	asm
 
-SRC	=	src/main.c	\
-		src/op.c	\
-		src/encoder.c	\
+SRC	=	src/main.c				\
+		src/op.c				\
+		src/encoder.c			\
+		src/commands_utils.c	\
+		src/write_file.c		\
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -21,7 +23,7 @@ CC	=	cc
 
 RM	=	rm -rf
 
-CFLAGS	=	-g3 -O2 -Wall -Wextra
+CFLAGS	=	-g3 -Wall -Wextra
 
 $(NAME)	:	$(OBJ)
 	make -C lib/

@@ -40,12 +40,20 @@ typedef struct arguments {
     char *argv[MAX_ARGS_NUMBER];
 } t_args;
 
+typedef struct counter {
+    struct counter *next;
+    int sizeline;
+    char *command;
+} t_counter;
+
+
 typedef struct commands {
     struct commands *next;
     op_t *op;
 } t_commands;
 
 typedef struct core {
+    int magic;
     char *name;
     char *comment;
     t_commands *commands;
@@ -58,5 +66,8 @@ typedef struct parse {
 
 void encod_hexa(char *file, char *filename);
 void encode_champion(char *buffer, char *fighter);
+
+void write_file(t_core *core, char *fighter);
+void push_back_commands(t_commands *head, t_commands *node);
 
 #endif /* ASM_H_ */

@@ -10,12 +10,15 @@
 void push_back_commands(t_commands *head, t_commands *node)
 {
     t_commands *tmp = head;
-    node->next = NULL;
-    if (!tmp) {
-        head = node;
-        return;
-    }
-    while (tmp->next)
+    while (tmp->next != NULL)
+        tmp = tmp->next;
+    tmp->next = node;
+}
+
+void push_back_counter(t_counter *head, t_counter *node)
+{
+    t_counter *tmp = head;
+    while (tmp->next != NULL)
         tmp = tmp->next;
     tmp->next = node;
 }

@@ -28,4 +28,15 @@
     " so that the processes\n\t\t\t\tare as far away from each other as"\
     " possible. The addresses\n\t\t\t\tare MEM_SIZE modulo.\n"
 
+    #define CYCLE_TO_DIE 1536
+    #define CYCLE_DELTA 5
+    #define NBR_LIVE 40
+
+typedef struct corewar_s {
+    int nbr_cycle;
+    int nbr_prog;
+    int load_adress;
+} t_corewar;
+
+
 #endif

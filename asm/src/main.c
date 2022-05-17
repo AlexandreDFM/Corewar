@@ -33,7 +33,7 @@ void error(int ac, char **av)
 char *create_fighter(char *p)
 {
     for (int i = 0, j = 1; p[i++]; j++) if (p[i] == '/') p += j, j = 1, i = 0;
-    char *xd = my_strcat(my_revstr(my_strstr(my_revstr(++p), ".")), "cor");
+    char *xd = my_strcat(my_revstr(my_strstr(my_revstr(p), ".")), "cor");
     return (my_strcpy(malloc(sizeof(char) * (my_strlen(xd) + 1)), xd));
 }
 
