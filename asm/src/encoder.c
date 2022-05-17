@@ -39,10 +39,7 @@ void encode_champion(char *buffer, char *fighter)
     }
     // COMMANDS
     for (int i = 0; array[i] != NULL; i++) {
-        if (my_strstr(array[i], "#")) continue;
-        if (my_strstr(array[i], NAME_CMD_STRING)) continue;
-        if (my_strstr(array[i], COMMENT_CMD_STRING)) continue;
-        if (!my_strstr(array[i], "#") || !my_strstr(array[i], "."))
+        if (!my_strstr(array[i], "#") && !my_strstr(array[i], "."))
             parse_line_prog(array[i], core);
     }
     return;
