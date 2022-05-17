@@ -26,5 +26,6 @@ void encod_hexa(char *file, char *filename);
 void encode_champion(char *buffer, char *fighter);
 
 void write_file(t_core *core, char *fighter);
+void parse_line_prog(char *line, t_core *core);
 
 #endif /* ASM_H_ */

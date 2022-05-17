@@ -16,7 +16,8 @@ t_core *init_core(void)
 
 void core_header(char *dest, char *str)
 {
-    while (*str++ != ' '); str++;
+    while (*str++ != ' ');
+    str++;
     str[my_strlen(str) - 1] = '\0';
     my_strcpy(dest, str);
 }
@@ -41,7 +42,8 @@ void encode_champion(char *buffer, char *fighter)
         if (my_strstr(array[i], "#")) continue;
         if (my_strstr(array[i], NAME_CMD_STRING)) continue;
         if (my_strstr(array[i], COMMENT_CMD_STRING)) continue;
-        parse_line_prog(array[i], core);
+        if (!my_strstr(array[i], "#") || !my_strstr(array[i], "."))
+            parse_line_prog(array[i], core);
     }
     return;
     // WRITING
