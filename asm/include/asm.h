@@ -11,7 +11,13 @@
 #ifndef ASM_H_
     #define ASM_H_
 
+typedef struct Vector2i_s {
+    int x;
+    int y;
+} Vector2i;
+
 typedef struct Prog {
+    struct Prog *prev;
     struct Prog *next;
     int *to_write;
     int *stock;
@@ -34,7 +40,7 @@ void encode_champion(char *buffer, char *fighter);
 
 void write_file(t_core *core, char *fighter);
 void parse_line_prog(char **line, t_core *core);
-void push_back_prog(t_prog **head, t_prog *node);
+void push_prog(t_prog **head, t_prog *node);
 
 void error(int ac, char **av);
 void usage(void);

@@ -49,19 +49,22 @@ void encode_champion(char *buffer, char *fighter)
     // COMMANDS
     for (int i = afterheader; bigtab[i] != NULL; i++)
         parse_line_prog(bigtab[i], core);
-    // printf("\n");
-    // for (t_prog *tmp = core->prog; tmp != NULL; tmp = tmp->next) {
-    //     for (int i = 0; i < tmp->size; i++) {
-    //         printf("%x,\t", tmp->to_write[i]);
-    //     }
-    //     printf("\n");
-    //     for (int i = 0; i < tmp->size; i++) {
-    //         printf("%d,\t", tmp->stock[i]);
-    //         core->header.prog_size += tmp->stock[i];
-    //     }
-    //     printf("\n");
-    // }
-    // printf("\n");
+    // for (int i = afterheader; bigtab[i] != NULL; i++)
+    //     parse_labels_prog(bigtab[i], core);
+    printf("\n");
+    t_prog *tmp = core->prog;
+    for (; tmp != NULL; tmp = tmp->next) {
+        for (int i = 0; i < tmp->size; i++) {
+            printf("%x,\t", tmp->to_write[i]);
+        }
+        printf("\n");
+        for (int i = 0; i < tmp->size; i++) {
+            printf("%d,\t", tmp->stock[i]);
+            core->header.prog_size += tmp->stock[i];
+        }
+        printf("\n");
+    }
+    // exit(0);
     // WRITING
     write_file(core, fighter);
     // exit(0);

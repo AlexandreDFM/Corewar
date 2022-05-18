@@ -29,6 +29,7 @@ int my_stocktostring(char opcode, char *str)
 
 int my_argtostring(char *str)
 {
+    // if (my_strncmp(str, "%:", 2) == 0) return (-1);
     if (my_strncmp(str, "r", 1) == 0) return (my_atoi(++str));
     if (my_strncmp(str, "%", 1) == 0) return (my_atoi(++str));
     return (my_atoi(str));
@@ -51,13 +52,19 @@ int calcul_pcb(char **arguments)
     return (pcb);
 }
 
-void push_back_prog(t_prog **head, t_prog *node)
+void push_prog(t_prog **head, t_prog *node)
 {
     if (*head == NULL) {
         *head = node;
         return;
     }
+    if ((*head)->next == NULL) {
+        node->prev = *head;
+        (*head)->next = node;
+        return;
+    }
     t_prog *tmp = *head;
     for (; tmp->next != NULL; tmp = tmp->next);
     tmp->next = node;
+    node->prev = tmp;
 }
