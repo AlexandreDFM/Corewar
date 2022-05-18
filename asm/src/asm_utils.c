@@ -47,6 +47,7 @@ int calcul_pcb(char **arguments)
     for (; my_strlen(str) < 8; i++)
         my_strcat(str, "0");
     pcb = my_bintohex(str);
+    free(str);
     return (pcb);
 }
 

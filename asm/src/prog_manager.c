@@ -44,11 +44,5 @@ void parse_line_prog(char **line, t_core *core)
     } else {
         create_line_prog(opcode, args, core);
     }
-    // push_back_prog(core->prog, prog);
-    // to_write[0] -> opcode -> 0x0b
-    // stock[0] -> sizeof(opcode) -> 1
-    // push tmp dans core->prog
-
-    // free_array(line_parse); free_array(arg_parse);
-
+    my_free_array(args);
 }

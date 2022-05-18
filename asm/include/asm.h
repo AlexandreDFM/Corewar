@@ -36,5 +36,7 @@ void write_file(t_core *core, char *fighter);
 void parse_line_prog(char **line, t_core *core);
 void push_back_prog(t_prog **head, t_prog *node);
 
+void error(int ac, char **av);
+void usage(void);
 
 #endif /* ASM_H_ */

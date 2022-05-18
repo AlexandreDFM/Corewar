@@ -28,7 +28,6 @@ void encode_champion(char *buffer, char *fighter)
 {
     // INIT
     t_core *core = init_core(); char **array = my_strtwa(buffer, "\n");
-
     // HEADER && COMMENT
     int afterheader = 0;
     for (int i = 0; array[i] != NULL; i++) {
@@ -46,27 +45,29 @@ void encode_champion(char *buffer, char *fighter)
     for (int i = 0; i < my_tablen(array); i++)
         bigtab[i] = my_strtwa(array[i], " ");
     bigtab[my_tablen(array)] = NULL;
-    free_array(array);
+    my_free_array(array);
     // COMMANDS
     for (int i = afterheader; bigtab[i] != NULL; i++)
         parse_line_prog(bigtab[i], core);
-    printf("\n");
-    for (t_prog *tmp = core->prog; tmp != NULL; tmp = tmp->next) {
-        for (int i = 0; i < tmp->size; i++) {
-            printf("%x,\t", tmp->to_write[i]);
-        }
-        printf("\n");
-        for (int i = 0; i < tmp->size; i++) {
-            printf("%d,\t", tmp->stock[i]);
-            core->header.prog_size += tmp->stock[i];
-        }
-        printf("\n");
-    }
-    printf("\n");
-    // exit(0);
+    // printf("\n");
+    // for (t_prog *tmp = core->prog; tmp != NULL; tmp = tmp->next) {
+    //     for (int i = 0; i < tmp->size; i++) {
+    //         printf("%x,\t", tmp->to_write[i]);
+    //     }
+    //     printf("\n");
+    //     for (int i = 0; i < tmp->size; i++) {
+    //         printf("%d,\t", tmp->stock[i]);
+    //         core->header.prog_size += tmp->stock[i];
+    //     }
+    //     printf("\n");
+    // }
+    // printf("\n");
     // WRITING
     write_file(core, fighter);
-    exit(0);
+    // exit(0);
     // FREE
-    free_array(array); free(core);
+    for (int i = 0; bigtab[i] != NULL; i++)
+        my_free_array(bigtab[i]);
+    free(bigtab);
+    my_free_core(core);
 }

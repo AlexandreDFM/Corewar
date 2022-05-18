@@ -13,6 +13,8 @@ SRC	=	src/main.c				\
 		src/write_file.c		\
 		src/prog_manager.c		\
 		src/asm_utils.c			\
+		src/error_usage.c		\
+		src/my_free_utils.c		\
 
 OBJ	=	$(SRC:.c=.o)
 

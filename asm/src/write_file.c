@@ -22,19 +22,19 @@ void write_header(t_core *core, char *fighter, int fd)
 {
     core->header.magic = little_endian_to_big_endian(core->header.magic);
     write(fd, &core->header.magic, 4);
-    
+
     int size = PROG_NAME_LENGTH + 4;
-    void *data = malloc(size);
-    my_memset(data, 0, size);
+    void *data = malloc(size); my_memset(data, 0, size);
     my_memcpy(data, core->header.prog_name, my_strlen(core->header.prog_name));
-    
+
     write(fd, data, size); free(data);
-    
+
     size = COMMENT_LENGTH + 4; data = malloc(size); my_memset(data, 0, size);
     my_memcpy(data, core->header.comment, my_strlen(core->header.comment));
-    core->header.prog_size = little_endian_to_big_endian(core->header.prog_size);
+    core->header.prog_size =
+    little_endian_to_big_endian(core->header.prog_size);
     write(fd, &core->header.prog_size, 4);
-    
+
     write(fd, data, size);
     free(data);
 }

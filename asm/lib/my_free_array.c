@@ -1,18 +1,15 @@
 /*
 ** EPITECH PROJECT, 2022
-** my_free_array
+** FREE
 ** File description:
-** Free double array function
+** Functions to free our work
 */
 
-#include "../include/proto.h"
+#include "../include/asm.h"
 
 void my_free_array(char **array)
 {
-    for (int i = 0; array[i]; i++) {
+    for (int i = 0; array[i] != NULL; i++)
         free(array[i]);
-        array[i] = NULL;
-    }
     free(array);
-    array = NULL;
 }
