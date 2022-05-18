@@ -43,9 +43,9 @@ typedef struct op_s
 } op_t;
 
 // size (in bytes)
+#define REG_SIZE    1
 #define IND_SIZE    2
 #define DIR_SIZE    4
-#define REG_SIZE    DIR_SIZE
 
 // op_tab
 extern op_t op_tab[];

@@ -27,6 +27,8 @@ int check_char(char c, char *presence);
 int pos_char(char *string, char *presence);
 int check_string(char *string, char *presence);
 int test_delim(char c, char *delim);
+int my_bintohex(char *bin);
+int my_nbtohexalow(int nbr);
 
 unsigned char *my_read_bytes(char *path, int size_of_read);
 
@@ -49,6 +51,7 @@ void my_putstr(char const *str);
 void my_putstr_error(char const *str);
 void my_free_array(char **array);
 void my_memcpy(void *dest, const void *src, size_t n);
+void *my_memset(void *dest, int value, int length);
 void my_strtrim(char *str);
 
 #endif /* !MY_H_ */

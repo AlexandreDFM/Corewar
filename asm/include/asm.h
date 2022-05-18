@@ -15,6 +15,7 @@ typedef struct Prog {
     struct Prog *next;
     int *to_write;
     int *stock;
+    int size;
 } t_prog;
 
 typedef struct Core {
@@ -22,10 +23,18 @@ typedef struct Core {
     t_prog *prog;
 } t_core;
 
+char get_op(char *command);
+
+int my_stocktostring(char opcode, char *str);
+int my_argtostring(char *str);
+int calcul_pcb(char **arguments);
+
 void encod_hexa(char *file, char *filename);
 void encode_champion(char *buffer, char *fighter);
 
 void write_file(t_core *core, char *fighter);
-void parse_line_prog(char *line, t_core *core);
+void parse_line_prog(char **line, t_core *core);
+void push_back_prog(t_prog **head, t_prog *node);
+
 
 #endif /* ASM_H_ */

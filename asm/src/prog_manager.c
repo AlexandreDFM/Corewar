@@ -7,64 +7,48 @@
 
 #include "../include/asm.h"
 
-char get_op(char *command)
+void create_line_prog(char opcode, char **args, t_core *core)
 {
-    for (int i = 0; op_tab[i].mnemonique != 0; i++) {
-        if (my_strcmp(command, op_tab[i].mnemonique) == 0)
-            return (op_tab[i].code);
-    }
-
-    return (0);
-}
-
-int my_gethexa(char *str)
-{
-    
-}
-
-t_prog *create_line_prog(char opcode, char **arguments)
-{
-    t_prog *prog = malloc(sizeof(t_prog));
-    int size_arg = my_tablen(arguments);
-    prog->to_write = malloc(sizeof(int) * (size_arg + 1));
-    prog->to_write[0] = opcode;
-    for (int i = 0; i < size_arg; i++)
-        prog->to_write[i + 1] = my_gethexa(arguments[i]);
-    for (t_prog *tmp = prog; tmp != NULL; tmp = tmp->next) {
-        for (int i = 0; i < (size_arg + 1); i++) {
-            printf("%d, ", tmp->to_write[i]);
+    t_prog *p = malloc(sizeof(t_prog)); p->next = NULL;
+    int size = my_tablen(args);
+    if (opcode != 1 && opcode != 12 && opcode != 9 && opcode != 15) {
+        p->size = size + 2; p->to_write = malloc(sizeof(int) * (p->size));
+        p->stock = malloc(sizeof(int) * (p->size));
+        p->to_write[0] = opcode; p->stock[0] = 1;
+        p->to_write[1] = calcul_pcb(args); p->stock[1] = 1;
+        for (int i = 0; i < size; i++) {
+            p->to_write[i + 2] = my_argtostring(args[i]);
+            p->stock[i + 2] = my_stocktostring(opcode, args[i]);
         }
-    }
-    exit(0);
-    return (prog);
+    } else {
+        p->size = size + 1; p->to_write = malloc(sizeof(int) * (p->size));
+        p->stock = malloc(sizeof(int) * (p->size));
+        p->to_write[0] = opcode; p->stock[0] = 1;
+        for (int i = 0; i < size; i++) {
+            p->to_write[i + 1] = my_argtostring(args[i]);
+            p->stock[i + 1] = my_stocktostring(opcode, args[i]);
+        }
+    } push_back_prog(&core->prog, p);
 }
 
-void push_back_prog(t_prog *head, t_prog *node)
+void parse_line_prog(char **line, t_core *core)
 {
-    if (head == NULL) {
-        head = node;
-        return;
+    if (line[1] == NULL || !my_strcmp(line[0], "\n")) return;
+    char opcode = get_op(line[0]);
+    char **args = my_strtwa(line[1], ",");
+    if (my_strstr(line[0], ":")) {
+        opcode = get_op(line[1]);
+        my_free_array(args);
+        args = my_strtwa(line[2], ",");
+        create_line_prog(opcode, args, core);
+    } else {
+        create_line_prog(opcode, args, core);
     }
-    t_prog *tmp = head;
-    for (; tmp->next != NULL; tmp = tmp->next);
-    tmp->next = node;
-}
-
-void parse_line_prog(char *line, t_core *core)
-{
-    // printf("%s\n", line);
-    if (!my_strstr(line, " ")) return;
-    char **line_parse = my_strtwa(line, " ");
-    char **arg_parse = my_strtwa(line_parse[1], ",");
-    char opcode = get_op(line_parse[0]);
-    
-    t_prog *prog = create_line_prog(opcode, arg_parse);
     // push_back_prog(core->prog, prog);
     // to_write[0] -> opcode -> 0x0b
     // stock[0] -> sizeof(opcode) -> 1
     // push tmp dans core->prog
 
-    free_array(line_parse); free_array(arg_parse);
+    // free_array(line_parse); free_array(arg_parse);
 
-    exit(0);
 }

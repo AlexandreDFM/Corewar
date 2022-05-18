@@ -12,6 +12,7 @@ SRC	=	src/main.c				\
 		src/encoder.c			\
 		src/write_file.c		\
 		src/prog_manager.c		\
+		src/asm_utils.c			\
 
 OBJ	=	$(SRC:.c=.o)
 
