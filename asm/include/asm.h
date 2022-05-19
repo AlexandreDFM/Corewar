@@ -45,7 +45,7 @@ void encode_champion(char *buffer, char *fighter);
 void write_file(t_core *core, char *fighter);
 void parse_line_prog(char **line, t_core *core);
 void push_prog(t_prog **head, t_prog *node);
-void treat_labels(t_core *core, char ***bigtab, int afterheader);
+void label_management(t_core *core);
 void my_free_core(t_core *core);
 
 void error(int ac, char **av);

@@ -17,7 +17,7 @@ int check_label(t_prog *tmp)
     return 0;
 }
 
-int add_label(t_prog *tmp, t_core *core, int poslab)
+int add_label(t_prog *tmp, int poslab)
 {
     int nb_bytes = 0;
     for (t_prog *tmp2 = tmp; tmp2 != NULL; tmp2 = tmp2->next) {
@@ -47,7 +47,7 @@ void label_management(t_core *core)
     }
     for (int i = 0; i < nb_labels; i++) {
         for (t_prog *tmp = core->prog; tmp != NULL; tmp = tmp->next) {
-            i += check_label(tmp) > 0 ? add_label(tmp, core, check_label(tmp) - 1) : 0;
+            i += check_label(tmp) > 0 ? add_label(tmp, check_label(tmp) - 1) : 0;
         }
     }
 }

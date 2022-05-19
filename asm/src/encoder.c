@@ -27,8 +27,35 @@ void core_header(char *dest, char *str)
 void encode_champion(char *buffer, char *fighter)
 {
     // INIT
+    for (int i = 0; buffer[i] != '\0'; i++) {
+        if (buffer[i] == '\t')
+            buffer[i] = ' ';
+    }
     t_core *core = init_core(); char **array = my_strtwa(buffer, "\n");
-    printf("%s\n", buffer);
+    // CLEAR TABS AND SPACES
+    for (int i = 0; array[i] != NULL; i++) {
+        for (int j = 0; array[i][j] != '\0'; j++) {
+            if (array[i][0] == ' ') {
+                while (array[i][j + 1] != '\0') {
+                    array[i][j++] = array[i][j + 1];
+                }
+                array[i][j] = '\0';
+                j = 0;
+            }
+        }
+    }
+    for (int i = 0; array[i] != NULL; i++) {
+        for (int j = 0; array[i][j] != '\0'; j++) {
+            if (j != 0 && array[i][j - 1] == ',' && array[i][j] == ' ') {
+                while (array[i][j + 1] != '\0') {
+                    array[i][j++] = array[i][j + 1];
+                }
+                array[i][j] = '\0';
+                j = 0;
+            }
+        }
+    }
+
     // HEADER && COMMENT
     int afterheader = 0;
     for (int i = 0; array[i] != NULL; i++) {
