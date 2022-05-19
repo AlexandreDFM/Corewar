@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2022
-** B-CPE-200-NCE-2-1-lemin-antoine.frankel
+** CHECKS
 ** File description:
 ** checks
 */

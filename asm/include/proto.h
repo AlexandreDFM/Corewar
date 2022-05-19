@@ -8,9 +8,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <stdbool.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>
+#include <limits.h>
 
 #ifndef MY_H_
     #define MY_H_
@@ -43,6 +45,7 @@ char *left_slice(char *strslice, char *new_array, int i, int j);
 char *right_slice(char *strslice, char *new_array, int i, int j);
 char *my_slice_array(int direction, char *strslice, int nbslice);
 char *my_strstr(char *str, char *to_find);
+char *my_strdup(char const *src);
 
 char **my_strtwa(char *str, char *delims);
 
