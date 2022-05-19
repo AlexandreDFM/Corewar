@@ -8,6 +8,9 @@
 NAME	=	corewar
 
 SRC	=	src/main.c	\
+		src/parse_flags.c	\
+		src/read_champions.c	\
+		src/parse_header.c	\
 
 OBJ	=	$(SRC:.c=.o)
 

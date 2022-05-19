@@ -17,85 +17,32 @@ void usage(void)
     my_putstr(PROG_NUMBER);
     my_putstr(LOAD_ADRESS);
     my_putstr("\t-h --help\t\tdisplay this help.\n");
-    return;
+    exit(0);
 }
 
-void error(int ac, char **av)
+void error(void)
 {
-    if (ac == 1) {
-        usage();
-        exit(84);
-    }
+    usage();
+    exit(84);
 }
 
-void corewar_loop(t_corewar *corewar)
+t_corewar *corewar_init_vm(char **av)
 {
-    int i = 0;
-    int j = 0;
-    int k = 0;
-
-    while (corewar->nbr_cycle > 0) {
-        if (corewar->nbr_cycle % corewar->cycle_to_die == 0) {
-            corewar->cycle_to_die -= CYCLE_DELTA;
-            corewar->check = 1;
-        }
-        if (corewar->check == 1) {
-            corewar->check = 0;
-            corewar->nbr_live = 0;
-        }
-        for (i = 0; i < corewar->nbr_prog; i++) {
-            if (corewar->prog[i].live == 1) {
-                corewar->nbr_live++;
-                corewar->prog[i].live = 0;
-            }
-        }
-        if (corewar->nbr_live == 0) {
-            corewar->cycle_to_die = 0;
-        }
-        if (corewar->cycle_to_die <= 0) {
-            corewar->cycle_to_die = 0;
-            corewar->check = 0;
-            corewar->nbr_live = 0;
-            corewar->nbr_cycle = 0;
-            for (j = 0; j < corewar->nbr_prog; j++) {
-                for (k = 0; k < MEM_SIZE; k++) {
-                    corewar->prog[j].prog_mem[k] = 0;
-                }
-            }
-        }
-        corewar->nbr_cycle--;
-    }
-}
-
-void corewar_init_vm(int nbr_cycle, int nbr_prog, int load_adress)
-{
-    t_corewar corewar;
-    if (nbr_cycle == 0) corewar.nbr_cycle = CYCLE_TO_DIE;
-    else corewar.nbr_cycle = nbr_cycle;
-    if (nbr_prog == 0) corewar.nbr_prog = CYCLE_DELTA;
-    else corewar.nbr_prog = nbr_prog;
-    if (load_adress == 0) corewar.load_adress = NBR_LIVE;
-    else corewar.load_adress = load_adress;
-    corewar_loop(&corewar);
+    t_corewar *corewar = malloc(sizeof(t_corewar));
+//    parse_flags(av);
+    corewar->nbr_cycle = CYCLE_TO_DIE;
+    corewar->nbr_prog = 2;
+    return corewar;
 }
 
 int main(int ac, char **av)
 {
-    error(ac, av);
-    if ((ac == 2)
-    && (!(my_strcmp(av[1], "-h")) || !(my_strcmp(av[1], "--help")))) {
+    if (((ac == 2)
+    && (!(my_strcmp(av[1], "-h")) || !(my_strcmp(av[1], "--help")))))
         usage();
-        exit(0);
-    }
-    if (ac < 3) {
-        usage();
-    }
-    int nbr_cycle = 0; int nbr_prog = 0; int load_adress = 0;
-    for (int i = 0; av[i] != NULL; i++) {
-        nbr_cycle = check_usage("-dump", av, i);
-        nbr_prog = check_usage("-n", av, i);
-        load_adress = check_usage("-a", av, i);
-    }
-    corewar_init_vm(nbr_cycle, nbr_prog, load_adress);
+    if (ac < 3)
+        error();
+    t_corewar *corewar = corewar_init_vm(av);
+    read_champions(corewar, av);
     return (0);
 }

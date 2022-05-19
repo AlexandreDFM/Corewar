@@ -5,7 +5,8 @@
 ** Header file for corewar
 */
 
-#include "my.h"
+#include "proto.h"
+#include "op.h"
 
 #ifndef COREWAR_H_
     #define COREWAR_H_
@@ -32,11 +33,34 @@
     #define CYCLE_DELTA 5
     #define NBR_LIVE 40
 
+    #define DUMP    "-dump"
+    #define PROG_NB "-n"
+    #define ADDRESS "-a"
+
+    #define BIT 1
+    #define BYTE 8
+
+typedef struct list_champions_s {
+    unsigned char *file;
+    unsigned char *name;
+    unsigned char *comment;
+    unsigned char *command;
+    int prog_size;
+    int number;
+    struct list_champions_s *next;
+    struct list_champions_s *prev;
+} t_list_champions;
+
 typedef struct corewar_s {
     int nbr_cycle;
     int nbr_prog;
-    int load_adress;
+    t_list_champions *champions;
 } t_corewar;
 
+void read_champions(t_corewar *corewar, char **av);
+void parse_flags(char **av);
+void parse_name_champion(t_list_champions *champion);
+void parse_prog_size(t_list_champions *champions);
+void parse_comment(t_list_champions *champions);
 
 #endif
