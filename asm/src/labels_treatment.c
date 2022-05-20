@@ -11,10 +11,24 @@ int check_label(t_prog *tmp)
 {
     for (int i = 0; i < tmp->size; i++) {
         if (tmp->to_write[i] == INT_MIN && tmp->lab != NULL) {
-            return i + 1;
+            return (i + 1);
         }
     }
-    return 0;
+    return (0);
+}
+
+int go_back(t_prog *tmp2, int nb_bytes)
+{
+    for (int i = 0; i < tmp2->size; i++)
+        nb_bytes -= tmp2->stock[i];
+    return (nb_bytes);
+}
+
+int go_after(t_prog *tmp2, int nb_bytes)
+{
+    for (int i = 0; i < tmp2->size; i++)
+        nb_bytes += tmp2->stock[i];
+    return (nb_bytes);
 }
 
 int add_label(t_prog *tmp, int poslab)
@@ -24,7 +38,7 @@ int add_label(t_prog *tmp, int poslab)
         if (tmp2->nlab != NULL && !my_strcmp(tmp2->nlab, tmp->lab)) {
             tmp->to_write[poslab] = nb_bytes; break;
         } else {
-            for (int i = 0; i < tmp2->size; i++) nb_bytes += tmp2->stock[i];
+            nb_bytes = go_after(tmp2, nb_bytes);
         }
     }
     if (tmp->to_write[poslab] != INT_MIN) return 1;
@@ -33,7 +47,7 @@ int add_label(t_prog *tmp, int poslab)
         if (tmp2->nlab != NULL && !my_strcmp(tmp2->nlab, tmp->lab)) {
             tmp->to_write[poslab] = nb_bytes; break;
         } else {
-            for (int i = 0; i < tmp2->size; i++) nb_bytes -= tmp2->stock[i];
+            nb_bytes = go_back(tmp2, nb_bytes);
         }
     }
     if (tmp->to_write[poslab] != INT_MIN) return 1;

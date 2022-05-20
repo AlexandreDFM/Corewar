@@ -43,19 +43,24 @@ void write_header(t_core *core, int fd)
     free(data);
 }
 
+void write_commands_loop(t_prog *tmp, int fd)
+{
+    for (int i = 0; i < tmp->size; i++) {
+        if (tmp->print == false) continue;
+        if (tmp->stock[i] > 1) {
+            tmp->to_write[i] =
+            little_endian_to_big_endian(tmp->to_write[i], tmp->stock[i]);
+            write(fd, &tmp->to_write[i], tmp->stock[i]);
+        } else {
+            write(fd, &tmp->to_write[i], tmp->stock[i]);
+        }
+    }
+}
+
 void write_commands(t_core *core, int fd)
 {
     for (t_prog *tmp = core->prog; tmp != NULL; tmp = tmp->next) {
-        for (int i = 0; i < tmp->size; i++) {
-            if (tmp->print == false) continue;
-            if (tmp->stock[i] > 1) {
-                tmp->to_write[i] =
-                little_endian_to_big_endian(tmp->to_write[i], tmp->stock[i]);
-                write(fd, &tmp->to_write[i], tmp->stock[i]);
-            } else {
-                write(fd, &tmp->to_write[i], tmp->stock[i]);
-            }
-        }
+        write_commands_loop(tmp, fd);
     }
 }
 

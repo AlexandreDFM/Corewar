@@ -17,6 +17,7 @@ SRC	=	src/main.c				\
 		src/my_free_utils.c		\
 		src/labels_treatment.c	\
 		src/error_handling.c	\
+		src/encoder_utils.c		\
 
 OBJ	=	$(SRC:.c=.o)
 

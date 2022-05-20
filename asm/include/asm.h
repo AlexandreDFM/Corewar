@@ -39,15 +39,17 @@ int my_argtostring(char *str, t_prog *p);
 int calcul_pcb(char **arguments);
 int little_endian_to_big_endian(int x, int nb_bytes);
 
-void encod_hexa(char *file, char *filename);
 void encode_champion(char *buffer, char *fighter);
 
+void clean_buffer(char *buffer);
+void clean_array(char **array);
 void write_file(t_core *core, char *fighter);
 void parse_line_prog(char **line, t_core *core);
 void push_prog(t_prog **head, t_prog *node);
 void label_management(t_core *core);
 void my_free_core(t_core *core);
 
+void label_error(t_prog *prog);
 void error(int ac, char **av);
 void usage(void);
 

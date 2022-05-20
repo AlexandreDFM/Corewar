@@ -52,7 +52,8 @@ int calcul_pcb(char **arguments)
     for (; arguments[i] != NULL; i++) {
         if (my_strncmp(arguments[i], "r", 1) == 0) my_strcat(str, "01");
         else if (my_strncmp(arguments[i], "%", 1) == 0) my_strcat(str, "10");
-        else my_strcat(str, "11");
+        else
+            my_strcat(str, "11");
     }
     for (; my_strlen(str) < 8; i++)
         my_strcat(str, "0");
