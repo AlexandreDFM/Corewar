@@ -8,6 +8,11 @@
 NAME	=	corewar
 
 SRC	=	src/main.c	\
+		src/parse_flags.c	\
+		src/read_champions.c	\
+		src/parse_header.c	\
+		src/free.c	\
+		src/vm_init.c	\
 
 OBJ	=	$(SRC:.c=.o)
 

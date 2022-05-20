@@ -5,7 +5,7 @@
 ** Function that compares two strings
 */
 
-#include "../include/my.h"
+#include "../include/proto.h"
 
 int my_strcmp(char const *s1, char const *s2)
 {

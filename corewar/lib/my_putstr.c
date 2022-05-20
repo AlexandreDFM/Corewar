@@ -5,7 +5,7 @@
 ** Function displaying a string
 */
 
-#include "../include/my.h"
+#include "../include/proto.h"
 
 void my_putstr(char const *str)
 {

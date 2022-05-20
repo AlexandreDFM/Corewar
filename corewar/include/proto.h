@@ -9,12 +9,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <limits.h>
+#include <fcntl.h>
 
 #ifndef MY_H_
     #define MY_H_
 
 int my_strcmp(char const *s1, char const *s2);
 int my_strlen(char const *str);
+int my_getnbr(char const *str);
+int my_atoi(char const *str);
+unsigned char *open_file(char *path, int size);
+int len_file(char *path);
+int switch_endian(int x);
+char *my_itoa(int nb);
+char *my_revstr(char *str);
+void *my_memset(void *dest, int value, int length);
+int my_pow(int nb, int power);
 
 void my_putstr(char const *str);
 void my_putstr_error(char const *str);
