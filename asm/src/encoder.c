@@ -19,9 +19,12 @@ t_core *init_core(void)
 void core_header(char *dest, char *str)
 {
     int size = 0;
+    if (my_strstr(str, "\"") == NULL) exit(84);
     if (my_strstr(str, NAME_CMD_STRING) != NULL) {
+        if (my_strlen(str) <= (my_strlen(NAME_CMD_STRING) + 3)) exit(84);
         size = PROG_NAME_LENGTH + 1;
     } else if (my_strstr(str, COMMENT_CMD_STRING) != NULL) {
+        if (my_strlen(str) <= (my_strlen(NAME_CMD_STRING) + 3)) exit(84);
         size = COMMENT_LENGTH + 1;
     } else {
         exit(84);
@@ -32,6 +35,7 @@ void core_header(char *dest, char *str)
     while (*str++ == ' ');
     str[my_strlen(str) - 1] = '\0';
     my_strcpy(dest, str);
+    if (my_strstr(dest, "\"")) exit(84);
     if (my_strlen(dest) > size) exit(84);
 }
 
