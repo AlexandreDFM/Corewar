@@ -37,30 +37,68 @@
     #define PROG_NB "-n"
     #define ADDRESS "-a"
 
+    #define MAX_PLAYER 4
+
     #define BIT 1
     #define BYTE 8
 
+    #define NB_PLAYER 0
+    #define INDEX 1
+    #define CYCLE_TMP 2
+    #define LEN_INSTRUCT 3
+    #define NB_LIVE 4
+
 typedef struct list_champions_s {
+    unsigned int address;
     unsigned char *file;
     unsigned char *name;
     unsigned char *comment;
     unsigned char *command;
     int prog_size;
-    int number;
+    int reg[REG_NUMBER];
     struct list_champions_s *next;
     struct list_champions_s *prev;
 } t_list_champions;
 
+typedef struct arena_s {
+    unsigned char tab[MEM_SIZE];
+    unsigned int nbr_prog;
+    unsigned int cycle;
+    unsigned int cycle_to_die;
+    unsigned int cycle_last_check;
+}t_arena;
+
 typedef struct corewar_s {
-    int nbr_cycle;
-    int nbr_prog;
     t_list_champions *champions;
+    t_arena *arena;
 } t_corewar;
 
-void read_champions(t_corewar *corewar, char **av);
+int read_champions(t_corewar *corewar, char **av);
 void parse_flags(char **av);
 void parse_name_champion(t_list_champions *champion);
 void parse_prog_size(t_list_champions *champions);
 void parse_comment(t_list_champions *champions);
+void parse_command(t_list_champions *champions);
+void if_magic(t_list_champions *champions);
+void free_corewar(t_corewar *corewar);
+void free_champions(t_list_champions *champions);
+t_arena *init_vm(void);
+
+void live_instruction(t_corewar *corewar, t_list_champions *champions);
+void ld_instruction(t_corewar *corewar, t_list_champions *champions);
+void st_instruction(t_corewar *corewar, t_list_champions *champions);
+void add_instruction(t_corewar *corewar, t_list_champions *champions);
+void sub_instruction(t_corewar *corewar, t_list_champions *champions);
+void and_instruction(t_corewar *corewar, t_list_champions *champions);
+void or_instruction(t_corewar *corewar, t_list_champions *champions);
+void xor_instruction(t_corewar *corewar, t_list_champions *champions);
+void zjump_instruction(t_corewar *corewar, t_list_champions *champions);
+void ldi_instruction(t_corewar *corewar, t_list_champions *champions);
+void sti_instruction(t_corewar *corewar, t_list_champions *champions);
+void fork_instruction(t_corewar *corewar, t_list_champions *champions);
+void lld_instruction(t_corewar *corewar, t_list_champions *champions);
+void lldi_instruction(t_corewar *corewar, t_list_champions *champions);
+void lfork_instruction(t_corewar *corewar, t_list_champions *champions);
+void aff_instruction(t_corewar *corewar, t_list_champions *champions);
 
 #endif

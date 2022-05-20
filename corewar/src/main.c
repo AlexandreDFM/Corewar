@@ -26,12 +26,11 @@ void error(void)
     exit(84);
 }
 
-t_corewar *corewar_init_vm(char **av)
+t_corewar *corewar_init(void)
 {
     t_corewar *corewar = malloc(sizeof(t_corewar));
 //    parse_flags(av);
-    corewar->nbr_cycle = CYCLE_TO_DIE;
-    corewar->nbr_prog = 2;
+    corewar->arena = init_vm();
     return corewar;
 }
 
@@ -42,7 +41,9 @@ int main(int ac, char **av)
         usage();
     if (ac < 3)
         error();
-    t_corewar *corewar = corewar_init_vm(av);
-    read_champions(corewar, av);
+    t_corewar *corewar = corewar_init();
+    if (read_champions(corewar, av) == 84)
+        return 84;
+    free_corewar(corewar);
     return (0);
 }

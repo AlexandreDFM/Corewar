@@ -5,7 +5,7 @@
 ** checks
 */
 
-#include "../include/proto.h"
+#include "../include/corewar.h"
 
 int check_char(char c, char *presence)
 {

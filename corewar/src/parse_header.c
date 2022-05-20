@@ -7,17 +7,27 @@
 
 #include "../include/corewar.h"
 
+void if_magic(t_list_champions *champions)
+{
+    int magic = 0;
+    for (int i = 1; i < 4; i++)
+        magic += switch_endian(champions->file[i] << (BYTE * i));
+    if (magic != COREWAR_EXEC_MAGIC) {
+        my_putstr("Bad Magic!\n");
+        exit(84);
+    }
+}
+
 void parse_name_champion(t_list_champions *champion)
 {
     int name_int = 0;
     for (int i = 4, j = 0, k = 0; i < PROG_NAME_LENGTH + 4; i++, j++) {
         if (champion->file[i] == 0)
             continue;
-        name_int = (champion->file[i]) << (BYTE * j) / (my_pow(16, j));
+        name_int = (champion->file[i]);
         champion->name[k] = (char)name_int;
         k++;
     }
-    printf("name = %s\n", champion->name);
 }
 
 void parse_prog_size(t_list_champions *champions)
@@ -26,7 +36,6 @@ void parse_prog_size(t_list_champions *champions)
     for (int i = PROG_NAME_LENGTH + 8, j= 0; j < 4; i++, j++)
         size += (champions->file[i]) << (BYTE * j) / (my_pow(16, j));
     champions->prog_size = size;
-    printf("prog_size = %d\n", champions->prog_size);
 }
 
 void parse_comment(t_list_champions *champions)
@@ -40,5 +49,13 @@ void parse_comment(t_list_champions *champions)
         champions->comment[k] = (char)comment_int;
         k++;
     }
-    printf("comment = %s\n", champions->comment);
+}
+
+void parse_command(t_list_champions *champions)
+{
+    int i = (PROG_NAME_LENGTH + COMMENT_LENGTH + 16);
+    champions->command = malloc(sizeof(char) * champions->prog_size + 1);
+    my_memset(champions->command, '\0', champions->prog_size);
+    for (int j = 0; j < champions->prog_size; i++, j++)
+        champions->command[j] = champions->file[i] >> 0;
 }

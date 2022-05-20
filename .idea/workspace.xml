@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e1335f2f-e5be-4dcf-944d-9d489db6562a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/corewar/src/free.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/add.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/aff.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/and.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/fork.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/ld.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/ldi.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/lfork.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/live.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/lld.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/lldi.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/or.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/st.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/sti.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/sub.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/xor.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/instructions/zjump.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/corewar/src/vm_init.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/lib/checks.c" beforeDir="false" afterPath="$PROJECT_DIR$/asm/lib/checks.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/asm/lib/conversion.c" beforeDir="false" afterPath="$PROJECT_DIR$/asm/lib/conversion.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corewar/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/corewar/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corewar/include/corewar.h" beforeDir="false" afterPath="$PROJECT_DIR$/corewar/include/corewar.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corewar/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/corewar/src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corewar/src/parse_header.c" beforeDir="false" afterPath="$PROJECT_DIR$/corewar/src/parse_header.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/corewar/src/read_champions.c" beforeDir="false" afterPath="$PROJECT_DIR$/corewar/src/read_champions.c" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2022" />
+    <option name="minorVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="28v2yStb3HSPXhJmfkLvM9TB4z4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "last_opened_file_path": "/home/leo/delivery/S2/CoreWar/main_project/compare/corewar",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/corewar/lib" />
+      <recent name="$PROJECT_DIR$/corewar/include" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e1335f2f-e5be-4dcf-944d-9d489db6562a" name="Changes" comment="" />
+      <created>1652082992858</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652082992858</updated>
+      <workItem from="1652082994073" duration="815000" />
+      <workItem from="1652098481111" duration="397000" />
+      <workItem from="1652272966295" duration="817000" />
+      <workItem from="1652434517467" duration="915000" />
+      <workItem from="1652949491742" duration="923000" />
+      <workItem from="1652951060027" duration="9036000" />
+      <workItem from="1652962617888" duration="19036000" />
+      <workItem from="1652987149589" duration="4337000" />
+      <workItem from="1653030334823" duration="12212000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

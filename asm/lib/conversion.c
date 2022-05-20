@@ -5,7 +5,7 @@
 ** Functions converting numbers
 */
 
-#include "../include/asm.h"
+#include "../include/corewar.h"
 
 int my_nbtohexalow(int nbr)
 {

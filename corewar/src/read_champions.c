@@ -17,7 +17,10 @@ void set_data_champion(t_list_champions *new, unsigned char *file, int i)
     new->command = NULL;
     new->next = NULL;
     new->prev = NULL;
-    new->number = i;
+    new->reg[0] = i;
+    new->reg[2] = 0;
+    new->reg[3] = 0;
+    new->reg[4] = 0;
     new->prog_size = 0;
 }
 
@@ -36,32 +39,25 @@ void push_back_champion(t_list_champions **head, unsigned char *file, int i)
     new->prev = tmp;
 }
 
-void if_magic(t_list_champions *champions)
-{
-    int magic = 0;
-    for (int i = 1; i < 4; i++)
-        magic += switch_endian(champions->file[i] << (BYTE * i));
-    if (magic != COREWAR_EXEC_MAGIC) {
-        my_putstr("Learn to use magic\n");
-        exit(84);
-    }
-}
-
-void read_champions(t_corewar *corewar, char **av)
+int read_champions(t_corewar *corewar, char **av)
 {
     corewar->champions = NULL;
-    for (int i = 1; i < corewar->nbr_prog + 1; i++)
+    for (int i = 1; av[i] != NULL; i++, corewar->arena->nbr_prog++) {
+        if (corewar->arena->nbr_prog > MAX_PLAYER) {
+            my_putstr("Too much champions\n");
+            return 84;
+        }
         push_back_champion(&corewar->champions,
-            open_file(av[i], sizeof(header_t)), i);
+            open_file(av[i], sizeof(BYTE) * sizeof(header_t)), i);
+    }
     t_list_champions *champions = corewar->champions;
     while (champions) {
-        printf("champion%d\n", champions->number);
         if_magic(champions);
         parse_name_champion(champions);
         parse_prog_size(champions);
         parse_comment(champions);
+        parse_command(champions);
         champions = champions->next;
-        if (champions)
-            printf("\n");
     }
+    return 0;
 }
