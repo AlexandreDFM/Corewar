@@ -29,7 +29,12 @@ int my_stocktostring(char opcode, char *str)
 
 int my_argtostring(char *str, t_prog *p)
 {
-    if (my_strncmp(str, "%:", 2) == 0) {
+    if (my_strncmp(str, ":", 1) == 0) {
+        p->lab = malloc(sizeof(char) * (my_strlen(str) + 1));
+        my_strcpy(p->lab, str + 1); my_strcat(p->lab, ":");
+        return (INT_MIN);
+    }
+    if (my_strncmp(str, "%:", 2) == 0 || my_strncmp(str, ":", 1) == 0) {
         p->lab = malloc(sizeof(char) * (my_strlen(str) + 1));
         my_strcpy(p->lab, str + 2); my_strcat(p->lab, ":");
         return (INT_MIN);

@@ -18,8 +18,9 @@ t_core *init_core(void)
 
 void core_header(char *dest, char *str)
 {
+    while (*str++ == '\t');
     while (*str++ != ' ');
-    str++;
+    while (*str++ == ' ');
     str[my_strlen(str) - 1] = '\0';
     my_strcpy(dest, str);
 }
@@ -27,17 +28,32 @@ void core_header(char *dest, char *str)
 void encode_champion(char *buffer, char *fighter)
 {
     // INIT
+    if (my_strstr(buffer, ".name") == NULL) exit(84);
     for (int i = 0; buffer[i] != '\0'; i++) {
         if (buffer[i] == '\t')
             buffer[i] = ' ';
     }
     t_core *core = init_core(); char **array = my_strtwa(buffer, "\n");
+    // HEADER && COMMENT
+    int afterheader = 0;
+    for (; array[afterheader] != NULL; afterheader++) {
+        if (my_strstr(array[afterheader], "#")) continue;
+        if (my_strstr(array[afterheader], NAME_CMD_STRING))
+            core_header(core->header.prog_name, array[afterheader]);
+        else if (my_strstr(array[afterheader], COMMENT_CMD_STRING))
+            core_header(core->header.comment, array[afterheader]);
+        else {
+            break;
+        }
+    }
     // CLEAR TABS AND SPACES
     for (int i = 0; array[i] != NULL; i++) {
         for (int j = 0; array[i][j] != '\0'; j++) {
             if (array[i][0] == ' ') {
+                j = 0;
                 while (array[i][j + 1] != '\0') {
-                    array[i][j++] = array[i][j + 1];
+                    array[i][j] = array[i][j + 1];
+                    j++;
                 }
                 array[i][j] = '\0';
                 j = 0;
@@ -55,39 +71,32 @@ void encode_champion(char *buffer, char *fighter)
             }
         }
     }
-
-    // HEADER && COMMENT
-    int afterheader = 0;
-    for (int i = 0; array[i] != NULL; i++) {
-        if (my_strstr(array[i], "#")) continue;
-        if (my_strstr(array[i], NAME_CMD_STRING))
-            core_header(core->header.prog_name, array[i]);
-        else if (my_strstr(array[i], COMMENT_CMD_STRING))
-            core_header(core->header.comment, array[i]);
-        else {
-            afterheader = i;
-            break;
-        }
-    }
     char ***bigtab = malloc(sizeof(char **) * (my_tablen(array) + 1));
     for (int i = 0; i < my_tablen(array); i++)
         bigtab[i] = my_strtwa(array[i], " ");
     bigtab[my_tablen(array)] = NULL;
     my_free_array(array);
     // COMMANDS
+
+    // for (int i = 0; bigtab[i] != NULL; i++) {
+    //     for (int j = 0; bigtab[i][j] != NULL; j++) {
+    //         printf("%s\n", bigtab[i][j]);
+    //     }
+    // }
+
     for (int i = afterheader; bigtab[i] != NULL; i++)
         parse_line_prog(bigtab[i], core);
 
+    // CHECK LABEL_ERROR
+    label_error(core->prog);
     // PROG SIZE
     for (t_prog *tmp = core->prog; tmp != NULL; tmp = tmp->next) {
         for (int i = 0; i < tmp->size; i++) {
             core->header.prog_size += tmp->stock[i];
         }
     }
-
     // LABELS
     label_management(core);
-    // treat_labels(core, bigtab, afterheader);
 
     // DEBUG
     // printf("\n");

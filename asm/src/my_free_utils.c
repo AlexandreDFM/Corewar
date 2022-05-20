@@ -9,6 +9,9 @@
 
 void my_free_core(t_core *core)
 {
+    if (core->prog == NULL) {
+        free(core); return;
+    }
     t_prog *tmp = core->prog, *tmp2 = core->prog->next;
     for (; tmp2 != NULL; tmp = tmp2, tmp2 = tmp->next) {
         free(tmp->to_write);

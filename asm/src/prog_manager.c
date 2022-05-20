@@ -41,10 +41,11 @@ void create_label_node(t_core *core, char *nlab)
 
 void parse_line_prog(char **line, t_core *core)
 {
-    if (line[1] == NULL && my_strstr(line[0], ":")) {
+    if (line[0] != NULL && line[1] == NULL && my_strstr(line[0], ":")) {
         create_label_node(core, line[0]);
     }
-    if (line[1] == NULL || !my_strcmp(line[0], "\n")) return;
+    if (line[0] == NULL || line[1] == NULL || !my_strcmp(line[0], "\n")
+    || my_strstr(line[0], "#") != NULL) return;
     char opcode = get_op(line[0]);
     char **args = my_strtwa(line[1], ",");
     if (my_strstr(line[0], ":")) {

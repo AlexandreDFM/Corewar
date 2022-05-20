@@ -63,7 +63,6 @@ typedef struct header_s
     char comment[COMMENT_LENGTH + 1];
 } header_t;
 
-
 // live
 #define CYCLE_TO_DIE    1536    // number of cycle before beig declared dead
 #define CYCLE_DELTA     5
