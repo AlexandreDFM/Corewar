@@ -38,6 +38,7 @@ def my_hexdump_champ():
                 os.system("hexdump -C " + file + " > my_" + file + ".txt")
             except:
                 print("No txt with " + file)
+                MAYBE_CRASH += 1
 
 #For all file in ./champ with *.s extension we launch the command ref
 
@@ -61,6 +62,7 @@ def ref_hexdump_champ():
                 os.system("hexdump -C " + file + " > ref_" + file + ".txt")
             except:
                 print("No txt with " + file)
+                MAYBE_CRASH += 1
 
 #For all file with ref_*.txt we launch the command diff with my_*.txt
 

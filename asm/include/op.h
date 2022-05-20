@@ -19,6 +19,8 @@
 
 #define LABEL_CHARS "abcdefghijklmnopqrstuvwxyz_0123456789"
 
+#define CHECK_CHARS "abcdefghijklmnopqrstuvwxyz_0123456789:%-,"
+
 #define NAME_CMD_STRING ".name"
 #define COMMENT_CMD_STRING  ".comment"
 

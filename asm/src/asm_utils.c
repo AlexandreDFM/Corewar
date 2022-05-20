@@ -39,7 +39,11 @@ int my_argtostring(char *str, t_prog *p)
         my_strcpy(p->lab, str + 2); my_strcat(p->lab, ":");
         return (INT_MIN);
     }
-    if (my_strncmp(str, "r", 1) == 0) return (my_atoi(++str));
+    if (my_strncmp(str, "r", 1) == 0) {
+        str++;
+        if (my_atoi(str) > REG_NUMBER || my_atoi(str) < 1) exit(84);
+        return (my_atoi(str));
+    }
     if (my_strncmp(str, "%", 1) == 0) return (my_atoi(++str));
     return (my_atoi(str));
 }

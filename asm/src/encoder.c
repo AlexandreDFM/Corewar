@@ -18,28 +18,41 @@ t_core *init_core(void)
 
 void core_header(char *dest, char *str)
 {
+    int size = 0;
+    if (my_strstr(str, NAME_CMD_STRING) != NULL) {
+        size = PROG_NAME_LENGTH + 1;
+    } else if (my_strstr(str, COMMENT_CMD_STRING) != NULL) {
+        size = COMMENT_LENGTH + 1;
+    } else {
+        exit(84);
+    }
     while (*str++ == '\t');
     while (*str++ == ' ');
     while (*str++ != ' ');
     while (*str++ == ' ');
     str[my_strlen(str) - 1] = '\0';
     my_strcpy(dest, str);
+    if (my_strlen(dest) > size) exit(84);
 }
 
 void get_name_and_comment(char **array, t_core *core, int *afterheader)
 {
-    int i = *afterheader;
+    int i = *afterheader, j = 0, k = 0;
     for (; array[i] != NULL; i++) {
         if (my_strstr(array[i], "#")) continue;
-        if (my_strstr(array[i], NAME_CMD_STRING))
-            core_header(core->header.prog_name, array[i]);
-        else if (my_strstr(array[i], COMMENT_CMD_STRING))
-            core_header(core->header.comment, array[i]);
-        else {
-            *afterheader = i;
-            break;
+        if (!my_strstr(array[i], NAME_CMD_STRING) &&
+        !my_strstr(array[i], COMMENT_CMD_STRING) && (j == 0 || k == 0)) {
+            exit(84);
+        }
+        if (my_strstr(array[i], NAME_CMD_STRING)) {
+            core_header(core->header.prog_name, array[i]); j++;
+        } else if (my_strstr(array[i], COMMENT_CMD_STRING)) {
+            core_header(core->header.comment, array[i]); k++;
+        } else {
+            *afterheader = i; break;
         }
     }
+    if (j > 1 || k > 1) exit(84);
 }
 
 void encode_champion(char *buffer, char *fighter)

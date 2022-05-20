@@ -22,14 +22,18 @@ def error_champ(char = "./asm"):
     for file in os.listdir("./error"):
         if file.endswith(".s"):
             try :
-                if (os.system(char + " ./error/" + file) == 21504):
+                i = os.system(char + " ./error/" + file + "> /dev/null")
+                if (i == 21504):
                     print("\033[01m\033[30m\033[04mSUCCES :\033[0m\033[32m with " + file + "\033[0m")
                     SUCCESS += 1
+                elif (i == 35584):
+                    print("\033[01m\033[30m\033[04mFAIL :\033[0m\033[31m Crash ? with " + char + " " + file + "\033[0m")
+                    FAILS += 1
                 else :
                     print("\033[01m\033[30m\033[04mFAIL :\033[0m\033[31m with " + file + "\033[0m")
                     FAILS += 1
             except:
-                print("\033[31mError with " + char + " " + file + "\033[0m")
+                print("\033[31mError Crash ? with " + char + " " + file + "\033[0m")
                 FAILS += 1
     for file in os.listdir("./"):
         if file.endswith(".cor"):
@@ -61,7 +65,6 @@ def main(argc, argv):
         except:
             print("Error with asm")
             exit(84)
-        error_champ()
     else :
         print("Error with argument")
         exit(84)

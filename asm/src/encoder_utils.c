@@ -55,4 +55,8 @@ void clean_array(char **array)
         for (int j = 0; array[i][j] != '\0'; j++)
             j = clean_space_after_comma(array, &i, j);
     }
+    for (int i = 0; array[i]; i++) {
+        if (array[i][0] != '#' && array[i][1] != '#')
+            remove_comment(array[i], '#');
+    }
 }
