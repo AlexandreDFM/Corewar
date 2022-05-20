@@ -23,11 +23,13 @@ def error_champ(char = "./asm"):
         if file.endswith(".s"):
             try :
                 if (os.system(char + " ./error/" + file) == 21504):
+                    print("\033[01m\033[30m\033[04mSUCCES :\033[0m\033[32m with " + file + "\033[0m")
                     SUCCESS += 1
                 else :
+                    print("\033[01m\033[30m\033[04mFAIL :\033[0m\033[31m with " + file + "\033[0m")
                     FAILS += 1
             except:
-                print("Error with " + char + " " + file)
+                print("\033[31mError with " + char + " " + file + "\033[0m")
                 FAILS += 1
     for file in os.listdir("./"):
         if file.endswith(".cor"):

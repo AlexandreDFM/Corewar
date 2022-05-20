@@ -70,11 +70,13 @@ def compare_hexdump():
         if file.endswith(".txt") and file.startswith("my_"):
             try :
                 if os.system("diff " + file + " ref_" + file[3:] + "> /dev/null") == 0:
+                    print("\033[01m\033[30m\033[04mSUCCES :\033[0m\033[32m with " + file + "\033[0m")
                     SUCCESS += 1
                 else:
+                    print("\033[01m\033[30m\033[04mFAIL :\033[0m\033[31m with " + file + "\033[0m")
                     FAILS += 1
             except:
-                print("Error with " + file + " and ref_" + file[3:])
+                print("\033[31mError with " + file + " and ref_" + file[3:] + "\033[0m")
                 MAYBE_CRASH += 1
 
 #For all file with my_*.txt and ref_*.txt we delete the txt file and the cor file
