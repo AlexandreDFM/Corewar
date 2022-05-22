@@ -29,7 +29,6 @@ void error(void)
 t_corewar *corewar_init(void)
 {
     t_corewar *corewar = malloc(sizeof(t_corewar));
-//    parse_flags(av);
     corewar->arena = init_vm();
     return corewar;
 }
@@ -44,6 +43,7 @@ int main(int ac, char **av)
     t_corewar *corewar = corewar_init();
     if (read_champions(corewar, av) == 84)
         return 84;
+    launch_vm(corewar);
     free_corewar(corewar);
     return (0);
 }

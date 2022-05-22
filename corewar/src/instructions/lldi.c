@@ -7,7 +7,8 @@
 
 #include "../../include/corewar.h"
 
-void lldi_instruction(t_corewar *corewar)
+void lldi_instruction(t_corewar *corewar, t_list_champions *champions)
 {
-
+    (void)corewar;
+    (void)champions;
 }

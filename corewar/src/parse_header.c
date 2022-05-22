@@ -33,7 +33,7 @@ void parse_name_champion(t_list_champions *champion)
 void parse_prog_size(t_list_champions *champions)
 {
     int size = 0;
-    for (int i = PROG_NAME_LENGTH + 8, j= 0; j < 4; i++, j++)
+    for (int i = PROG_NAME_LENGTH + 8, j = 0; j < 4; i++, j++)
         size += (champions->file[i]) << (BYTE * j) / (my_pow(16, j));
     champions->prog_size = size;
 }

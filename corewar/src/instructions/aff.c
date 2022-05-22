@@ -7,7 +7,8 @@
 
 #include "../../include/corewar.h"
 
-void aff_instruction(t_corewar *corewar)
+void aff_instruction(t_corewar *corewar, t_list_champions *champions)
 {
-
+    (void)corewar;
+    (void)champions;
 }

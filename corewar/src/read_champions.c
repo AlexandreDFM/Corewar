@@ -18,9 +18,10 @@ void set_data_champion(t_list_champions *new, unsigned char *file, int i)
     new->next = NULL;
     new->prev = NULL;
     new->reg[0] = i;
-    new->reg[2] = 0;
-    new->reg[3] = 0;
-    new->reg[4] = 0;
+    new->infos[0] = i;
+    new->infos[2] = 0;
+    new->infos[3] = 0;
+    new->infos[4] = 0;
     new->prog_size = 0;
 }
 
