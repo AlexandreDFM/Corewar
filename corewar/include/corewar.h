@@ -76,6 +76,9 @@ typedef struct corewar_s {
     t_arena *arena;
     unsigned int load_address[4];
     unsigned int progs_nb[4];
+    int winner;
+    int one_death;
+    int nbr_death;
 } t_corewar;
 
 int read_champions(t_corewar *corewar, char **av);
@@ -93,6 +96,7 @@ unsigned int hex_to_uint(unsigned char *tab, int index_byte,
     int size_instruction);
 void push_back_new_champ(t_list_champions **list, t_list_champions *champion,
     int new_address, unsigned char *tab);
+void pos_player(t_corewar *corewar);
 
 void live_instruction(t_corewar *corewar, t_list_champions *champions);
 void ld_instruction(t_corewar *corewar, t_list_champions *champions);

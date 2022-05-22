@@ -14,7 +14,7 @@ t_arena *init_vm(void)
     arena->cycle = 0;
     arena->cycle_last_check = 0;
     arena->cycle_to_die = CYCLE_TO_DIE;
-    my_memset(arena->tab, '\0', MEM_SIZE - 1);
+    my_memset(arena->tab, 0, MEM_SIZE - 1);
     return arena;
 }
 
@@ -35,9 +35,4 @@ void pos_player(t_corewar *corewar)
         base += add;
         champions = champions->next;
     }
-}
-
-void launch_vm(t_corewar *corewar)
-{
-    pos_player(corewar);
 }

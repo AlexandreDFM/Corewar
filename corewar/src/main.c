@@ -33,6 +33,8 @@ t_corewar *corewar_init(char **av)
     for (int i = 0; i < 4; i++)
         corewar->load_address[i] = 0, corewar->progs_nb[i] = 0;
     parse_flags(corewar, av);
+    corewar->winner = 0;
+    corewar->one_death = 0;
     return corewar;
 }
 
