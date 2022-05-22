@@ -30,15 +30,21 @@ char *dec_to_hex(unsigned int nb)
     return hex;
 }
 
+int fct_tempo(char *base, char *hex, int j, int i)
+{
+    for (j = 0; base[j] != '\0'; j++)
+        if (hex[i] == base[j]) break;
+    return (j);
+}
+
 char *hex_to_binary(char *hex)
 {
-    char *base = "0123456789abcdef", j = 0, k = 0;
+    char *base = "0123456789abcdef"; int j = 0, k = 0;
     char *binary = malloc(sizeof(char) * (my_strlen(hex) * 4 + 1));
     my_memset(binary, 0, (my_strlen(hex) * 4 + 1));
     binary[(my_strlen(hex)) * 4] = '\0';
     for (int i = 0; hex[i] != '\0'; i++) {
-        for (j = 0; base[j] != '\0'; j++)
-            if (hex[i] == base[j]) break;
+        j = fct_tempo(base, hex, j, i);
         for (; j != 0; k++) {
             binary[k] = j % 2 + 48;
             j /= 2;
