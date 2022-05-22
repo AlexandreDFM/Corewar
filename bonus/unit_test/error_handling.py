@@ -11,14 +11,16 @@ import sys
 
 global SUCCESS
 global FAILS
+global MAYBE_CRASH
 
 SUCCESS = 0
 FAILS = 0
+MAYBE_CRASH = 0
 
 #For all file in ./error try with the program given in argument and test if the output is 84
 
 def error_champ(char = "./asm"):
-    global SUCCESS, FAILS
+    global SUCCESS, FAILS, MAYBE_CRASH
     for file in os.listdir("./error"):
         if file.endswith(".s"):
             try :
@@ -28,13 +30,13 @@ def error_champ(char = "./asm"):
                     SUCCESS += 1
                 elif (i == 35584):
                     print("\033[01m\033[30m\033[04mFAIL :\033[0m\033[31m Crash ? with " + char + " " + file + "\033[0m")
-                    FAILS += 1
+                    MAYBE_CRASH += 1
                 else :
                     print("\033[01m\033[30m\033[04mFAIL :\033[0m\033[31m with " + file + "\033[0m")
                     FAILS += 1
             except:
                 print("\033[31mError Crash ? with " + char + " " + file + "\033[0m")
-                FAILS += 1
+                MAYBE_CRASH += 1
     for file in os.listdir("./"):
         if file.endswith(".cor"):
             try :
@@ -43,6 +45,7 @@ def error_champ(char = "./asm"):
                 print("Error remove " + file)
     print("SUCCESS : " + str(SUCCESS))
     print("FAILS : " + str(FAILS))
+    print("MAYBE CRASH : " + str(MAYBE_CRASH))
 
 def main(argc, argv):
     if argc == 2:

@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 #ifndef MY_H_
     #define MY_H_
@@ -18,6 +20,12 @@ int my_strlen(char const *str);
 
 void my_putstr(char const *str);
 void my_putstr_error(char const *str);
+
+int count_int_read(char *mappath);
+char **my_strtwa(char *str, char *delims);
+char *open_file(char *mappath, int size_of_read);
+int get_rows(char *map);
+int get_cols(char *map);
 
 #endif /* !MY_H_ */
 

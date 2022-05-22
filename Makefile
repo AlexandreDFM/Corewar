@@ -7,17 +7,17 @@
 
 all	:
 	make -C asm/
-	make -C bonus/
+	make -C bonus/corewar_visualizer/
 	make -C corewar/
 
 clean	:
 	make clean -C asm/
-	make clean -C bonus/
+	make clean -C bonus/corewar_visualizer/
 	make clean -C corewar/
 
 fclean	:	clean
 	make fclean -C asm/
-	make fclean -C bonus/
+	make fclean -C bonus/corewar_visualizer/
 	make fclean -C corewar/
 
 re	:	fclean all

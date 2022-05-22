@@ -19,11 +19,13 @@ CC	=	cc
 
 RM	=	rm -rf
 
-CFLAGS	=	-g3 -O2 -Wall -Wextra
+CFLAGS	=	-g3 -O2 -Wall -Wextra -lncurses
 
 $(NAME)	:	$(OBJ)
 	make -C lib/
 	$(CC) -o $(NAME) $(OBJ) $(LIB) $(INCLUDE) $(CFLAGS)
+
+all	:	$(NAME)
 
 clean	:
 	make clean -C lib/

@@ -56,6 +56,7 @@ void my_free_array(char **array);
 void my_memcpy(void *dest, const void *src, size_t n);
 void *my_memset(void *dest, int value, int length);
 void my_strtrim(char *str);
+void remove_comment(char *str, char garbage);
 
 #endif /* !MY_H_ */
 
