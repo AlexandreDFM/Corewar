@@ -36,9 +36,12 @@ char *hex_to_binary(char *hex)
     char *binary = malloc(sizeof(char) * (my_strlen(hex) * 4 + 1));
     my_memset(binary, 0, (my_strlen(hex) * 4 + 1));
     binary[(my_strlen(hex)) * 4] = '\0';
+    bool to_break = false;
     for (int i = 0; hex[i] != '\0'; i++) {
         for (j = 0; base[j] != '\0'; j++)
-            if (hex[i] == base[j]) break;
+            (hex[i] == base[j]) ? to_break = true : 0;
+        if (to_break == true)
+            break;
         for (; j != 0; k++) {
             binary[k] = j % 2 + 48;
             j /= 2;

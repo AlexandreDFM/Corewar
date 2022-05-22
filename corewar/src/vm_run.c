@@ -22,8 +22,7 @@ void check_champions(t_corewar *corewar)
         else if (champion->infos[LEN_INSTRUCT] == 0) {
             tab[corewar->arena->tab[champion->infos[INDEX]] - 1](corewar,
                 champion);
-        }
-        else {
+        } else {
             champion->infos[INDEX] += 1;
             champion->infos[LEN_INSTRUCT]--;
         }
