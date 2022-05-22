@@ -29,7 +29,7 @@ CC	=	cc
 
 RM	=	rm -rf
 
-CFLAGS	=	-g3 -Wall -Wextra
+CFLAGS	=	-Wall -Wextra
 
 $(NAME)	:	$(OBJ)
 	make -C lib/
