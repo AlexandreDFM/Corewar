@@ -25,7 +25,7 @@ void pos_player(t_corewar *corewar)
     unsigned base = 0;
     while (champions) {
         champions->address = base;
-        champions->reg[1] = base;
+        champions->infos[1] = base;
         for (int i = 0; i < champions->prog_size; i++)
             corewar->arena->tab[base + i] = champions->command[i];
         base += add;
@@ -36,5 +36,5 @@ void pos_player(t_corewar *corewar)
 void launch_vm(t_corewar *corewar)
 {
     pos_player(corewar);
-
+    and_instruction(corewar, corewar->champions);
 }

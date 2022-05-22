@@ -7,7 +7,7 @@
 
 #include "../../include/corewar.h"
 
-void lfork_instruction(t_corewar *corewar)
+void lfork_instruction(t_corewar *corewar, t_list_champions *champions)
 {
 
 }

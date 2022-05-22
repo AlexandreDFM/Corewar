@@ -44,6 +44,7 @@ int main(int ac, char **av)
     t_corewar *corewar = corewar_init();
     if (read_champions(corewar, av) == 84)
         return 84;
+    launch_vm(corewar);
     free_corewar(corewar);
     return (0);
 }

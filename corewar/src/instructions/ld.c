@@ -9,7 +9,7 @@
 
 void ld_instruction(t_corewar *corewar, t_list_champions *champions)
 {
-    champions->reg[CYCLE_TMP] = 5;
-    champions->reg[LEN_INSTRUCT] = 4;
-    champions->reg[NB_LIVE] += 1;
+    champions->infos[CYCLE_TMP] = 5;
+    champions->infos[LEN_INSTRUCT] = 4;
+    champions->infos[NB_LIVE] += 1;
 }

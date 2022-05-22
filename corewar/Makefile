@@ -13,6 +13,7 @@ SRC	=	src/main.c	\
 		src/parse_header.c	\
 		src/free.c	\
 		src/vm_init.c	\
+		$(wildcard src/instructions/*.c)	\
 
 OBJ	=	$(SRC:.c=.o)
 

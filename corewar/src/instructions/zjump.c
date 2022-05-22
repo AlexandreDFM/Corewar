@@ -7,7 +7,7 @@
 
 #include "../../include/corewar.h"
 
-void zjump_instruction(t_corewar *corewar)
+void zjump_instruction(t_corewar *corewar, t_list_champions *champions)
 {
 
 }

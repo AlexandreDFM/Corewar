@@ -7,7 +7,7 @@
 
 #include "../../include/corewar.h"
 
-void sti_instruction(t_corewar *corewar)
+void sti_instruction(t_corewar *corewar, t_list_champions *champions)
 {
 
 }
