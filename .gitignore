@@ -12,3 +12,7 @@ asm/champions/
 *.o
 *.a
 *.pdf
+
+# IDE Files
+.vscode/
+.idea/
