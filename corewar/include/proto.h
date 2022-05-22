@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include <unistd.h>
 #include <limits.h>
 #include <fcntl.h>
@@ -33,6 +34,7 @@ void my_putstr(char const *str);
 void my_putstr_error(char const *str);
 int my_strncmp(char const *s1, char const *s2, int n);
 char *my_strcpy(char *dest, char const *src);
+char *my_strstr(char *str, char *to_find);
 
 #endif /* !MY_H_ */
 

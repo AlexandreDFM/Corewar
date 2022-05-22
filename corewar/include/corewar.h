@@ -20,7 +20,7 @@
     "the following format:\n\t\t\t\t32 bytes/line in hexadecimal"\
     " (A0BCDEFE1DD3...)\n"
     #define PROG_NUMBER "\t-n prog_number\t\tsets the next program's number."\
-    "By default, the first\n\t\t\t\tfree number in the parameter order\n"
+    " By default, the first\n\t\t\t\tfree number in the parameter order\n"
     #define LOAD_ADRESS "\t-a load_address\t\tsets the next program's loading"\
     " adress. When no address\n\t\t\t\tis specified, optimize the addresses"\
     " so that the processes\n\t\t\t\tare as far away from each other as"\
@@ -69,15 +69,17 @@ typedef struct arena_s {
     unsigned int cycle;
     unsigned int cycle_to_die;
     unsigned int cycle_last_check;
-}t_arena;
+} t_arena;
 
 typedef struct corewar_s {
     t_list_champions *champions;
     t_arena *arena;
+    unsigned int load_address[4];
+    unsigned int progs_nb[4];
 } t_corewar;
 
 int read_champions(t_corewar *corewar, char **av);
-void parse_flags(char **av);
+void parse_flags(t_corewar *corewar, char **av);
 void parse_name_champion(t_list_champions *champion);
 void parse_prog_size(t_list_champions *champions);
 void parse_comment(t_list_champions *champions);
@@ -108,5 +110,6 @@ unsigned int do_op_from_pcb(t_corewar *corewar, char *pcb, char op, int index);
 int get_len_instruct_from_pcb(char *pcb, int size_direct);
 unsigned int calcul_instruction(t_vector_2ui param, t_vector_2ui size,
     char operators);
+unsigned int pad_unsigned_int(unsigned int nbr, int size);
 
 #endif

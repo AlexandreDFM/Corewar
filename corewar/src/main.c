@@ -26,10 +26,13 @@ void error(void)
     exit(84);
 }
 
-t_corewar *corewar_init(void)
+t_corewar *corewar_init(char **av)
 {
     t_corewar *corewar = malloc(sizeof(t_corewar));
     corewar->arena = init_vm();
+    for (int i = 0; i < 4; i++)
+        corewar->load_address[i] = 0, corewar->progs_nb[i] = 0;
+    parse_flags(corewar, av);
     return corewar;
 }
 
@@ -40,7 +43,7 @@ int main(int ac, char **av)
         usage();
     if (ac < 3)
         error();
-    t_corewar *corewar = corewar_init();
+    t_corewar *corewar = corewar_init(av);
     if (read_champions(corewar, av) == 84)
         return 84;
     launch_vm(corewar);
