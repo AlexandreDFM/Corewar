@@ -36,7 +36,7 @@ void core_header(char *dest, char *str)
     str[my_strlen(str) - 1] = '\0';
     my_strcpy(dest, str);
     if (my_strstr(dest, "\"")) exit(84);
-    if (my_strlen(dest) > size) exit(84);
+    if (my_strlen(dest) >= size) exit(84);
 }
 
 void get_name_and_comment(char **array, t_core *core, int *afterheader)
