@@ -43,7 +43,7 @@ void get_name_and_comment(char **array, t_core *core, int *afterheader)
 {
     int i = *afterheader, j = 0, k = 0;
     for (; array[i] != NULL; i++) {
-        if (my_strstr(array[i], "#")) continue;
+        if (my_strstr(array[i], "#")) exit(84);
         if (!my_strstr(array[i], NAME_CMD_STRING) &&
         !my_strstr(array[i], COMMENT_CMD_STRING) && (j == 0 || k == 0)) {
             exit(84);
