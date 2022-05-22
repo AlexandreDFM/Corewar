@@ -22,12 +22,16 @@ void pos_player(t_corewar *corewar)
 {
     t_list_champions *champions = corewar->champions;
     unsigned int add = MEM_SIZE / corewar->arena->nbr_prog;
-    unsigned base = 0;
+    unsigned base = 0; int j = 0;
     while (champions) {
+        if (corewar->load_address[j] != 0) {
+            base += corewar->load_address[j]; j++;
+        }
         champions->address = base;
-        champions->infos[1] = base;
+        champions->infos[1] = champions->address;
         for (int i = 0; i < champions->prog_size; i++)
-            corewar->arena->tab[base + i] = champions->command[i];
+            corewar->arena->tab[champions->address + i] =
+                champions->command[i];
         base += add;
         champions = champions->next;
     }
@@ -36,5 +40,4 @@ void pos_player(t_corewar *corewar)
 void launch_vm(t_corewar *corewar)
 {
     pos_player(corewar);
-    and_instruction(corewar, corewar->champions);
 }

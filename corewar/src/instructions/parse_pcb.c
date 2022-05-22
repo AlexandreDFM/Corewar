@@ -21,7 +21,7 @@ unsigned int stock_multiple_bytes_in_one_int(unsigned char *bytes, int size)
 int get_len_instruct_from_pcb(char *pcb, int size_direct)
 {
     char *tmp = malloc(sizeof(char) * my_strlen(pcb) + 1);
-    my_memset(tmp, '\0', my_strlen(pcb) + 1);
+    my_memset(tmp, '\0', my_strlen(pcb));
     tmp = my_strcpy(tmp, pcb);
     int len = 0;
     while (tmp[0] != '\0') {
@@ -30,7 +30,6 @@ int get_len_instruct_from_pcb(char *pcb, int size_direct)
         my_strncmp(tmp, "10", 2) == 0 ? len += size_direct : 0;
         tmp += 2;
     }
-    free(tmp);
     return len;
 }
 
