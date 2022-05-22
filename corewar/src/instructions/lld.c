@@ -9,6 +9,11 @@
 
 void lld_instruction(t_corewar *corewar, t_list_champions *champions)
 {
-    (void)corewar;
-    (void)champions;
+    champions->infos[CYCLE_TMP] = 10;
+    char *pcb = hex_to_binary_from_int(
+        corewar->arena->tab[champions->infos[INDEX]]);
+    champions->infos[LEN_INSTRUCT] = get_len_instruct_from_pcb(pcb, 4) + 2;
+    unsigned int distance = ld_get_distance(corewar, champions, pcb, 4);
+    champions->reg[corewar->arena->tab[champions->infos[INDEX + 3]] - 1] =
+        corewar->arena->tab[champions->infos[INDEX] + distance];
 }

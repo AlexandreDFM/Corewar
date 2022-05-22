@@ -10,7 +10,7 @@
 int number_in_tab(unsigned int tab[4], int nb)
 {
     for (int i = 0; i < 4; i++)
-        if (tab[i] == nb)
+        if ((int)tab[i] == nb)
             return 1;
     return 0;
 }

@@ -40,7 +40,7 @@ unsigned int sti_get_distance(t_corewar *corewar,
 
 void sti_instruction(t_corewar *corewar, t_list_champions *champions)
 {
-    champions->infos[CYCLE_TMP] = 6;
+    champions->infos[CYCLE_TMP] = 25;
     char *pcb = hex_to_binary_from_int(
         corewar->arena->tab[champions->infos[INDEX] + 1]);
     champions->infos[LEN_INSTRUCT] = get_len_instruct_from_pcb(pcb, 2) + 2;

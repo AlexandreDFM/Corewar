@@ -7,8 +7,31 @@
 
 #include "../../include/corewar.h"
 
+unsigned int ldi_get_distance(t_corewar *corewar,
+    t_list_champions *champions, char *pcb, int size_direct)
+{
+    char *tmp = malloc(sizeof(char) * my_strlen(pcb) + 1);
+    my_memset(tmp, '\0', my_strlen(pcb));
+    tmp = my_strcpy(tmp, pcb); unsigned int param[2] = {0, 0}; tmp += 2;
+    for (int i = 0; i < 2; i++, tmp += 2) {
+        my_strncmp(tmp, "11", 2) == 0 ? param[i] = hex_to_uint(
+            corewar->arena->tab,
+            corewar->arena->tab[champions->infos[INDEX] + 2], size_direct) :
+        my_strncmp(tmp, "10", 2) == 0 ? param[i] = hex_to_uint(
+            corewar->arena->tab,
+            corewar->arena->tab[champions->infos[INDEX] + 2], 2) : 0;
+    }
+    return (param[0] % IDX_MOD + param[1]);
+}
+
 void ldi_instruction(t_corewar *corewar, t_list_champions *champions)
 {
-    (void)corewar;
-    (void)champions;
+    champions->infos[CYCLE_TMP] = 25;
+    char *pcb = hex_to_binary_from_int(
+        corewar->arena->tab[champions->infos[INDEX]]);
+    champions->infos[LEN_INSTRUCT] = get_len_instruct_from_pcb(pcb, 4) + 2;
+    unsigned int distance = ldi_get_distance(corewar, champions, pcb, 4);
+    pcb += 4;
+    champions->reg[pcb[2] - 1] =
+        corewar->arena->tab[champions->infos[INDEX] + distance];
 }

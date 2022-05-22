@@ -89,6 +89,10 @@ void free_corewar(t_corewar *corewar);
 void free_champions(t_list_champions *champions);
 t_arena *init_vm(void);
 void launch_vm(t_corewar *corewar);
+unsigned int hex_to_uint(unsigned char *tab, int index_byte,
+    int size_instruction);
+void push_back_new_champ(t_list_champions **list, t_list_champions *champion,
+    int new_address, unsigned char *tab);
 
 void live_instruction(t_corewar *corewar, t_list_champions *champions);
 void ld_instruction(t_corewar *corewar, t_list_champions *champions);
@@ -111,5 +115,7 @@ int get_len_instruct_from_pcb(char *pcb, int size_direct);
 unsigned int calcul_instruction(t_vector_2ui param, t_vector_2ui size,
     char operators);
 unsigned int pad_unsigned_int(unsigned int nbr, int size);
+unsigned int ld_get_distance(t_corewar *corewar,
+    t_list_champions *champions, char *pcb, int size_direct);
 
 #endif
