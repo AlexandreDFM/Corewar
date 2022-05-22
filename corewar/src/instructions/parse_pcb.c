@@ -48,7 +48,8 @@ t_vector_2ui set_param_for_op(unsigned char *tab, char *pcb, t_vector_2ui size,
         size.y == 0 ? size.y = 4 : 0;
         for (int i = 0; i < 4; i++) to_pass[i] = tab[index + i + 2];
         param.x = stock_multiple_bytes_in_one_int(to_pass, size.x);
-    } else if (my_strncmp(pcb, "10", 2) == 0) {
+    }
+    if (my_strncmp(pcb, "10", 2) == 0) {
         size.x == 0 ? size.x = 2 :
         size.y == 0 ? size.y = 2 : 0;
         for (int i = 0; i < 2; i++) to_pass[i] = tab[index + i + 2];
