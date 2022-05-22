@@ -24,7 +24,7 @@ void core_header(char *dest, char *str)
         if (my_strlen(str) <= (my_strlen(NAME_CMD_STRING) + 3)) exit(84);
         size = PROG_NAME_LENGTH + 1;
     } else if (my_strstr(str, COMMENT_CMD_STRING) != NULL) {
-        if (my_strlen(str) <= (my_strlen(NAME_CMD_STRING) + 3)) exit(84);
+        (my_strlen(str) <= (my_strlen(NAME_CMD_STRING) + 3)) ? exit(84) : 0;
         size = COMMENT_LENGTH + 1;
     } else {
         exit(84);
