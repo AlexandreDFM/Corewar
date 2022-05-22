@@ -96,7 +96,7 @@ void sub_instruction(t_corewar *corewar, t_list_champions *champions);
 void and_instruction(t_corewar *corewar, t_list_champions *champions);
 void or_instruction(t_corewar *corewar, t_list_champions *champions);
 void xor_instruction(t_corewar *corewar, t_list_champions *champions);
-void zjump_instruction(t_corewar *corewar, t_list_champions *champions);
+void zjmp_instruction(t_corewar *corewar, t_list_champions *champions);
 void ldi_instruction(t_corewar *corewar, t_list_champions *champions);
 void sti_instruction(t_corewar *corewar, t_list_champions *champions);
 void fork_instruction(t_corewar *corewar, t_list_champions *champions);

@@ -14,4 +14,5 @@ void live_instruction(t_corewar *corewar, t_list_champions *champions)
     champions->reg[NB_LIVE] += 1;
 
     (void)corewar;
+    (void)champions;
 }

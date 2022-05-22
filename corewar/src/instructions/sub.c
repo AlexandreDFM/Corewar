@@ -12,8 +12,9 @@ void sub_instruction(t_corewar *corewar, t_list_champions *champions)
     champions->infos[CYCLE_TMP] = 10;
     champions->infos[LEN_INSTRUCT] = 5;
 
-    champions->reg[dec_to_hex(corewar->arena->tab[INDEX + 4])[1]] =
-        (champions->reg[dec_to_hex(corewar->arena->tab[INDEX + 2])[1]] -
-            champions->reg[dec_to_hex(corewar->arena->tab[INDEX + 4])[1]]);
+    champions->reg[champions->infos[INDEX] + 4] =
+        (champions->reg[champions->infos[INDEX] + 2] -
+            champions->reg[champions->infos[INDEX] + 3]);
     (void)corewar;
+    (void)champions;
 }

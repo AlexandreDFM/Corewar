@@ -9,5 +9,6 @@
 
 void fork_instruction(t_corewar *corewar, t_list_champions *champions)
 {
-
+    (void)corewar;
+    (void)champions;
 }

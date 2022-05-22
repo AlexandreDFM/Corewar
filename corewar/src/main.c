@@ -29,7 +29,6 @@ void error(void)
 t_corewar *corewar_init(void)
 {
     t_corewar *corewar = malloc(sizeof(t_corewar));
-//    parse_flags(av);
     corewar->arena = init_vm();
     return corewar;
 }
