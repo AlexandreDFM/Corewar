@@ -30,7 +30,6 @@ int my_pow(int nb, int power);
 char *dec_to_hex(unsigned int nb);
 char *hex_to_binary(char *hex);
 char *hex_to_binary_from_int(unsigned int nb);
-void my_putstr(char const *str);
 void my_putstr_error(char const *str);
 int my_strncmp(char const *s1, char const *s2, int n);
 char *my_strcpy(char *dest, char const *src);

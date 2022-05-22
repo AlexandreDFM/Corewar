@@ -7,14 +7,15 @@
 
 NAME	=	corewar
 
-SRC	=	src/main.c	\
-		src/parse_flags.c	\
-		src/read_champions.c	\
-		src/parse_header.c	\
-		src/free.c	\
-		src/vm_init.c	\
-		src/vm_run.c	\
+SRC	=	src/main.c							\
+		src/parse_flags.c					\
+		src/read_champions.c				\
+		src/parse_header.c					\
+		src/free.c							\
+		src/vm_init.c						\
+		src/vm_run.c						\
 		$(wildcard src/instructions/*.c)	\
+		$(wildcard lib/prints/*.c)			\
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -26,7 +27,7 @@ CC	=	cc
 
 RM	=	rm -rf
 
-CFLAGS	=	-g3 -O2 -Wall -Wextra
+CFLAGS	=	-g3 -Wall -Wextra
 
 $(NAME)	:	$(OBJ)
 	make -C lib/

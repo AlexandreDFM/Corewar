@@ -35,7 +35,21 @@ t_corewar *corewar_init(char **av)
     parse_flags(corewar, av);
     corewar->winner = 0;
     corewar->one_death = 0;
+    corewar->nbr_death = 0;
     return corewar;
+}
+
+void winner(t_corewar *corewar)
+{
+    t_list_champions *champion = corewar->champions;
+    while (champion) {
+        if (champion->infos[0] == corewar->winner) {
+            my_printf("The player %d(%s)has won.\n", champion->infos[0],
+                champion->name);
+            break;
+        }
+        champion = champion->next;
+    }
 }
 
 int main(int ac, char **av)
@@ -49,6 +63,7 @@ int main(int ac, char **av)
     if (read_champions(corewar, av) == 84)
         return 84;
     launch_vm(corewar);
+    winner(corewar);
     free_corewar(corewar);
     return (0);
 }

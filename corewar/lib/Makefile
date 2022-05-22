@@ -7,7 +7,8 @@
 
 NAME	=	libmy.a
 
-SRC	=	$(wildcard *.c)
+SRC	=	$(wildcard *.c)	\
+		$(wildcard prints/*.c)	\
 
 OBJ	=	$(SRC:.c=.o)
 

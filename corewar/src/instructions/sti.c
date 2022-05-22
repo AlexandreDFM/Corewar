@@ -43,11 +43,11 @@ void sti_instruction(t_corewar *corewar, t_list_champions *champions)
     champions->infos[CYCLE_TMP] = 25;
     char *pcb = hex_to_binary_from_int(
         corewar->arena->tab[champions->infos[INDEX] + 1]);
-    champions->infos[LEN_INSTRUCT] = get_len_instruct_from_pcb(pcb, 2) + 2;
+    champions->infos[LEN_INSTRUCT] = get_len_instruct_from_pcb(pcb, 2) + 4;
     unsigned int pos_to_write = sti_get_distance(corewar, champions, pcb, 2) +
         champions->infos[INDEX];
     unsigned int pad_register_content = pad_unsigned_int(
-        champions->reg[champions->infos[INDEX] + 2], 4);
+        champions->reg[champions->infos[INDEX + 2]], 4);
     for (int i = 0, j = 3; i < 4; i++, j--) {
         corewar->arena->tab[pos_to_write + i] =
             pad_register_content << BYTE * j;

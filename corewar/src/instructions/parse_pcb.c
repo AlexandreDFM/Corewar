@@ -10,11 +10,8 @@
 unsigned int stock_multiple_bytes_in_one_int(unsigned char *bytes, int size)
 {
     int res = 0;
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++)
         res += (bytes[i] >> BYTE * i);
-        printf("byte = %x\n", bytes[i]);
-        printf("res = %x\n", res);
-    }
     return res;
 }
 
@@ -23,6 +20,7 @@ int get_len_instruct_from_pcb(char *pcb, int size_direct)
     char *tmp = malloc(sizeof(char) * my_strlen(pcb) + 1);
     my_memset(tmp, '\0', my_strlen(pcb));
     tmp = my_strcpy(tmp, pcb);
+    tmp[6] = '\0';
     int len = 0;
     while (tmp[0] != '\0') {
         my_strncmp(tmp, "01", 2) == 0 ? len += 1 : 0;

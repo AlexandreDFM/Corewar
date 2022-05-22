@@ -6,6 +6,7 @@
 */
 
 #include "proto.h"
+#include "printf.h"
 #include "op.h"
 
 #ifndef COREWAR_H_

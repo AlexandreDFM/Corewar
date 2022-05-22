@@ -9,10 +9,10 @@
 
 void live_instruction(t_corewar *corewar, t_list_champions *champions)
 {
-    champions->reg[CYCLE_TMP] = 10;
-    champions->reg[LEN_INSTRUCT] = 4;
-    champions->reg[NB_LIVE] += 1;
-
+    champions->infos[CYCLE_TMP] = 10;
+    champions->infos[LEN_INSTRUCT] = 5;
+    champions->infos[NB_LIVE] += 1;
+    my_printf("The player %d(%s)is alive.\n", champions->infos[0],
+        champions->name);
     (void)corewar;
-    (void)champions;
 }
