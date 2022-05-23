@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdbool.h>
 
 #ifndef MY_H_
     #define MY_H_

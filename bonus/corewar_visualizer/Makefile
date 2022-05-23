@@ -7,7 +7,15 @@
 
 NAME	=	bonus
 
-SRC	=	src/main.c	\
+SRC	=	src/main.c							\
+		src/launch_visu.c					\
+		src/parse_champions.c				\
+		src/parse_flags.c					\
+		src/parse_header.c					\
+		src/vm_init.c						\
+		src/vm_run.c						\
+		src/free.c							\
+		$(wildcard src/instructions/*.c)	\
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -19,7 +27,7 @@ CC	=	cc
 
 RM	=	rm -rf
 
-CFLAGS	=	-g3 -O2 -Wall -Wextra -lncurses
+CFLAGS	=	-g3 -O2 -Wall -Wextra -lncurses -lcsfml-audio
 
 $(NAME)	:	$(OBJ)
 	make -C lib/
