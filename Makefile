@@ -9,6 +9,7 @@ all	:
 	make -C asm/
 	make -C bonus/corewar_visualizer/
 	make -C corewar/
+	@clear && cat bonus/compilation/compil.txt
 
 clean	:
 	make clean -C asm/
