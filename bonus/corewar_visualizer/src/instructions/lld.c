@@ -16,5 +16,4 @@ void lld_instruction(t_corewar *corewar, t_list_champions *champions)
     unsigned int distance = ld_get_distance(corewar, champions, pcb, 4);
     champions->reg[corewar->arena->tab[champions->infos[INDEX + 3]] - 1] =
         corewar->arena->tab[champions->infos[INDEX] + distance];
-    printf("lld\n");
 }

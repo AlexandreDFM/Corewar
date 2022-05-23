@@ -12,7 +12,7 @@ void live_instruction(t_corewar *corewar, t_list_champions *champions)
     champions->infos[CYCLE_TMP] = 10;
     champions->infos[LEN_INSTRUCT] = 5;
     champions->infos[NB_LIVE] += 1;
-    printf("The player %d(%s)is alive.\n", champions->infos[0],
-        champions->name);
+    // printf("The player %d(%s)is alive.\n", champions->infos[0],
+        // champions->name);
     (void)corewar;
 }

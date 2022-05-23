@@ -28,6 +28,11 @@ char *open_file(char *mappath, int size_of_read);
 int get_rows(char *map);
 int get_cols(char *map);
 
+void *my_memset(void *dest, int value, int length);
+char *my_strcpy(char *dest, char const *src);
+char *my_strncpy(char *dest, char const *src, int n);
+int my_strncmp(char const *s1, char const *s2, int n);
+
 #endif /* !MY_H_ */
 
 #define UNDERLINE   "\033[04m"

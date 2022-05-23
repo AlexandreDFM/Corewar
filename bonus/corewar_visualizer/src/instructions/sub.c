@@ -17,5 +17,4 @@ void sub_instruction(t_corewar *corewar, t_list_champions *champions)
             champions->reg[champions->infos[INDEX] + 3]);
     (void)corewar;
     (void)champions;
-    printf("sub\n");
 }

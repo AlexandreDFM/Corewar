@@ -15,5 +15,4 @@ void lfork_instruction(t_corewar *corewar, t_list_champions *champions)
         corewar->arena->tab[champions->infos[INDEX] + 1], 2);
     push_back_new_champ(&corewar->champions, champions,
         new_address, corewar->arena->tab);
-    printf("lfork\n");
 }

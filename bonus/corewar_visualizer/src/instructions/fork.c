@@ -36,5 +36,4 @@ void fork_instruction(t_corewar *corewar, t_list_champions *champions)
     new_address %= IDX_MOD;
     push_back_new_champ(&corewar->champions, champions,
         new_address, corewar->arena->tab);
-    printf("fork\n");
 }

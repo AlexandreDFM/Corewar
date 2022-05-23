@@ -18,5 +18,4 @@ void xor_instruction(t_corewar *corewar, t_list_champions *champions)
     champions->reg[(int)pcb[1] - 48] = res_op;
     (void)corewar;
     (void)champions;
-    printf("xor\n");
 }

@@ -20,32 +20,28 @@ void check_champions(t_corewar *corewar)
         if (champion->infos[CYCLE_TMP] != 0)
             champion->infos[CYCLE_TMP]--;
         else if (champion->infos[LEN_INSTRUCT] == 0) {
-//            printf("instruct = %d -> index: %d\n",
-//                corewar->arena->tab[champion->infos[INDEX]] - 1, champion->infos[INDEX]);
             tab[corewar->arena->tab[champion->infos[INDEX]] - 1](corewar,
                 champion);
-        }
-        else {
+        } else {
             champion->infos[INDEX] += 1;
             champion->infos[LEN_INSTRUCT]--;
-//            printf("champ n: %d -> index: %d\n",champion->infos[0], champion->infos[INDEX]);
         }
-//        printf("champ n: %d -> cycle_champ: %d -> index: %d -> len_instruct: %d\n",
-//            champion->infos[0], champion->infos[CYCLE_TMP], champion->infos[INDEX], champion->infos[LEN_INSTRUCT]);
         champion = champion->next;
     }
-//    printf("\n");
 }
 
 int check_winner(t_corewar *corewar)
 {
     t_list_champions *champion = corewar->champions;
+    int winner = 0;
     while (champion) {
-        if (champion->infos[NB_LIVE] != 0)
-            return (champion->infos[0]);
+        if (champion->infos[NB_LIVE] != 0) {
+            winner = champion->infos[0];
+            break;
+        }
         champion = champion->next;
     }
-    return (0);
+    return (winner);
 }
 
 void detect_death(t_corewar *corewar)
@@ -55,7 +51,10 @@ void detect_death(t_corewar *corewar)
         if (champion->infos[NB_LIVE] == 0) {
             corewar->nbr_death++;
             corewar->one_death = 1;
-            corewar->winner = check_winner(corewar);
+        }
+        if (corewar->nbr_death == (int)corewar->arena->nbr_prog - 1) {
+            corewar->winner = champion->infos[0];
+            break;
         }
         if (corewar->winner != 0)
             break;
@@ -75,21 +74,4 @@ void set_nb_alive_to_zero(t_corewar *corewar)
 void launch_vm(t_corewar *corewar)
 {
     launch_visu(corewar);
-//     for (; corewar->winner == 0; corewar->arena->cycle_last_check++, corewar->arena->cycle++) {
-//         if (corewar->arena->cycle_last_check == corewar->arena->cycle_to_die) {
-//             printf("reset\n");
-//             corewar->arena->cycle_last_check = 0;
-//             set_nb_alive_to_zero(corewar);
-//             corewar->one_death == 0 ?
-//                 corewar->arena->cycle_to_die -= CYCLE_DELTA : 0;
-//         }
-//         if (corewar->nbr_death == (int)corewar->arena->nbr_prog - 1) {
-//             corewar->winner = check_winner(corewar);
-//             break;
-//         }
-//         check_champions(corewar);
-//         printf("cyle to die%d\n")
-// //        printf("cycle = %d\n", corewar->arena->cycle);
-// //        usleep(100000);
-//     }
 }

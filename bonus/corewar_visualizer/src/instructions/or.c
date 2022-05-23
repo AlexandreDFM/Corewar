@@ -17,5 +17,4 @@ void or_instruction(t_corewar *corewar, t_list_champions *champions)
         do_op_from_pcb(corewar, pcb, '|', champions->infos[1]);
     champions->reg[(int)pcb[1] - 48] = res_op;
     (void)corewar;
-    printf("or\n");
 }

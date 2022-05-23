@@ -20,5 +20,4 @@ void aff_instruction(t_corewar *corewar, t_list_champions *champions)
     my_putuchar(corewar->arena->tab[champions->infos[INDEX + 1] - 1]);
     (void)corewar;
     (void)champions;
-    printf("aff\n");
 }

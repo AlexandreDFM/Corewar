@@ -37,6 +37,9 @@ typedef struct visu_core {
 } t_visu_core;
 
 char *hex_to_binary(char *hex);
+void detect_death(t_corewar *corewar);
+void check_champions(t_corewar *corewar);
+void set_nb_alive_to_zero(t_corewar *corewar);
 unsigned char *open_file2(char *path, int size);
 
 #endif /* !BONUS_H_ */

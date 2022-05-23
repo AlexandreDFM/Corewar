@@ -17,15 +17,15 @@ unsigned int stock_multiple_bytes_in_one_int(unsigned char *bytes, int size)
 
 int get_len_instruct_from_pcb(char *pcb, int size_direct)
 {
-    char *tmp = malloc(sizeof(char) * strlen(pcb) + 1);
-    memset(tmp, '\0', strlen(pcb));
-    tmp = strcpy(tmp, pcb);
+    char *tmp = malloc(sizeof(char) * my_strlen(pcb) + 1);
+    my_memset(tmp, '\0', my_strlen(pcb));
+    tmp = my_strcpy(tmp, pcb);
     tmp[6] = '\0';
     int len = 0;
     while (tmp[0] != '\0') {
-        strncmp(tmp, "01", 2) == 0 ? len += 1 : 0;
-        strncmp(tmp, "11", 2) == 0 ? len += 2 : 0;
-        strncmp(tmp, "10", 2) == 0 ? len += size_direct : 0;
+        my_strncmp(tmp, "01", 2) == 0 ? len += 1 : 0;
+        my_strncmp(tmp, "11", 2) == 0 ? len += 2 : 0;
+        my_strncmp(tmp, "10", 2) == 0 ? len += size_direct : 0;
         tmp += 2;
     }
     return len;
@@ -35,18 +35,18 @@ t_vector_2ui set_param_for_op(unsigned char *tab, char *pcb, t_vector_2ui size,
     int index)
 {
     unsigned char to_pass[4]; t_vector_2ui param = {0, 0};
-    if (strncmp(pcb, "01", 2) == 0) {
+    if (my_strncmp(pcb, "01", 2) == 0) {
         size.x == 0 ? size.x = 1 :
         size.y == 0 ? size.y = 1 : 0;
         param.x = tab[9 + size.x + size.y];
     }
-    if (strncmp(pcb, "11", 2) == 0) {
+    if (my_strncmp(pcb, "11", 2) == 0) {
         size.x == 0 ? size.x = 4 :
         size.y == 0 ? size.y = 4 : 0;
         for (int i = 0; i < 4; i++) to_pass[i] = tab[index + i + 2];
         param.x = stock_multiple_bytes_in_one_int(to_pass, size.x);
     }
-    if (strncmp(pcb, "10", 2) == 0) {
+    if (my_strncmp(pcb, "10", 2) == 0) {
         size.x == 0 ? size.x = 2 :
         size.y == 0 ? size.y = 2 : 0;
         for (int i = 0; i < 2; i++) to_pass[i] = tab[index + i + 2];

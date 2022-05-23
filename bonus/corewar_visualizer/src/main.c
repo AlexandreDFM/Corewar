@@ -43,8 +43,8 @@ void winner(t_corewar *corewar)
     t_list_champions *champion = corewar->champions;
     while (champion) {
         if (champion->infos[0] == corewar->winner) {
-            printf("The player %d(%s)has won.", champion->infos[0],
-                champion->name);
+            // printf("The player %d(%s)has won.\n", champion->infos[0],
+                // champion->name);
             break;
         }
         champion = champion->next;
@@ -62,6 +62,7 @@ int main(int argc, char **argv)
     if (read_champions(corewar, argv) == 84)
         return 84;
     launch_vm(corewar);
+    winner(corewar);
     free_corewar(corewar);
     return (0);
 }
