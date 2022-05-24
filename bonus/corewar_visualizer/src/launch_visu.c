@@ -7,10 +7,21 @@
 
 #include "../include/bonus.h"
 
-void my_print_timer(int rows, int cols, sfVector2i timer)
+unsigned char *get_name_winner_player(t_list_champions *champions, int nb_player)
+{
+    t_list_champions *tmp = champions;
+    while (tmp) {
+        if (tmp->infos[0] == nb_player)
+            return tmp->name;
+        tmp = tmp->next;
+    }
+    return NULL;
+}
+
+void my_print_timer(t_corewar *corewar, int rows, int cols, vector3i timer)
 {
     int lines_calc = LINES / 2 - rows / 2 + 32;
-    int cols_calc = COLS / 2 - cols / 2 - 30 + 170;
+    int cols_calc = COLS / 2 - cols / 2 - 30 + 142;
     if (timer.x < 10) {
         if (timer.y < 10) {
             mvwprintw(stdscr, lines_calc, cols_calc, "0%d : 0%d",timer.y, timer.x);
@@ -24,29 +35,23 @@ void my_print_timer(int rows, int cols, sfVector2i timer)
             mvwprintw(stdscr, lines_calc, cols_calc, "%d : %d",timer.y, timer.x);
         }
     }
+    if (corewar->winner == 0)
+        mvwprintw(stdscr, lines_calc - 1, cols_calc, "NONE");
+    else
+        mvwprintw(stdscr, lines_calc - 1, cols_calc, "Player %d (%s)", corewar->winner, get_name_winner_player(corewar->champions, corewar->winner));
 }
 
-unsigned char *get_name_winner_player(t_list_champions *champions, int nb_player)
-{
-    t_list_champions *tmp = champions;
-    while (tmp) {
-        if (tmp->infos[0] == nb_player)
-            return tmp->name;
-        tmp = tmp->next;
-    }
-    return NULL;
-}
 
 void my_print_champ(sfVector2i coords, unsigned char *namechamp, vector3i infos, int nb_player)
 {
-    mvwprintw(stdscr, coords.x, coords.y + 132, "%.14s [%d]", namechamp, nb_player);
+    mvwprintw(stdscr, coords.x, coords.y + 132, "%.10s [%d]", namechamp, nb_player);
     mvwprintw(stdscr, coords.x, coords.y + 147, "%d", infos.x);
     mvwprintw(stdscr, coords.x, coords.y + 159, "%d", infos.y);
     mvwprintw(stdscr, coords.x, coords.y + 170, infos.z == 0 ? "    YES" : "    NO");
 
 }
 
-void my_interface(t_corewar *corewar, t_visu_core *core, sfVector2i timer)
+void my_interface(t_corewar *corewar, t_visu_core *core, vector3i timer)
 {
     int rows = LINES / 2 - core->rows / 2, cols = COLS / 2 - core->cols / 2 - 30;
     for (int i = 0; core->array[i] != NULL; i++) {
@@ -64,15 +69,15 @@ void my_interface(t_corewar *corewar, t_visu_core *core, sfVector2i timer)
             }
         }
     }
-    for (int j = 0, lines2 = 2, cols2 = 0; j < 6144; j++, cols2++) {
-        if (j % 128 == 0) lines2 += 1, cols2 = 0;
+    for (int j = 0, lines2 = rows, cols2 = 1; j < 6144; j++, cols2++) {
+        if (j % 128 == 0) lines2 += 1, cols2 = 1;
         attron(COLOR_PAIR(3));
         mvwprintw(stdscr, lines2, cols + cols2, " ");
         mvwprintw(stdscr, lines2, cols + cols2, "%x", corewar->arena->tab[j]);
         attroff(COLOR_PAIR(3));
     }
-    for (int j = 0, lines2 = 2, cols2 = 0; j < 6144; j++, cols2++) {
-        if (j % 128 == 0) lines2 += 1, cols2 = 0;
+    for (int j = 0, lines2 = rows, cols2 = 1; j < 6144; j++, cols2++) {
+        if (j % 128 == 0) lines2 += 1, cols2 = 1;
         for (t_list_champions *champ = corewar->champions; champ != NULL; champ = champ->next) {
             if ((int)champ->address == j) {
                 int size = sizeof(champ->command) * 3 - 1;
@@ -96,17 +101,10 @@ void my_interface(t_corewar *corewar, t_visu_core *core, sfVector2i timer)
         core->champions_infos[j] = (vector3i) {champ->infos[4], core->champions_infos[j].y, core->champions_infos[j].y};
         my_print_champ((sfVector2i) {rows + i, cols}, champ->name, core->champions_infos[j], champ->infos[0]);
     }
-    my_print_timer(core->rows, core->cols, timer);
-    mvwprintw(stdscr, core->rows + 2, core->cols + 27, "Winner : ");
-    if (corewar->winner == 0)
-        mvwprintw(stdscr, core->rows + 2, core->cols + 37, "NONE");
-    else
-        mvwprintw(stdscr, core->rows + 2, core->cols + 37, "Player %d (%s)",
-            corewar->winner, get_name_winner_player(corewar->champions,
-                corewar->winner));
+    my_print_timer(corewar, core->rows, core->cols, timer);
 }
 
-void time_gestionnary(t_corewar *corewar, int i, clock_t *clock1, clock_t *clock2, sfVector2i *timer)
+void time_gestionnary(t_corewar *corewar, int i, clock_t *clock1, clock_t *clock2, vector3i *timer)
 {
     *clock2 = clock();
     if (i == 1 && corewar->winner == 0) {
@@ -120,7 +118,7 @@ void time_gestionnary(t_corewar *corewar, int i, clock_t *clock1, clock_t *clock
         check_champions(corewar);
         corewar->arena->cycle_last_check++, corewar->arena->cycle++;
     }
-    if (((*clock2) - (*clock1)) / CLOCKS_PER_SEC > 1) {
+    if ((*timer).z >= (2000 / 5)) {
         clear();
         refresh();
         *clock1 = clock();
@@ -129,6 +127,7 @@ void time_gestionnary(t_corewar *corewar, int i, clock_t *clock1, clock_t *clock
             (*timer).x = 0;
             (*timer).y += 1;
         }
+        (*timer).z = 0;
     }
 }
 
@@ -202,7 +201,7 @@ int launch_visu(t_corewar *corewar)
     init_pair(4, COLOR_BLACK, COLOR_BLUE);
     init_pair(5, COLOR_BLACK, COLOR_CYAN);
     int pause = 1, input = 0;
-    sfVector2i timer = {0, 0}; sfVector2i trash = {0, 0};
+    vector3i timer = {0, 0, 0}; vector3i trash = {0, 0, 0};
     pos_player(corewar);
     while (1) {
         if (COLS / 2 - core.cols / 2 - 30 < 0 || LINES / 2 - core.rows / 2 < 0) {
@@ -222,6 +221,7 @@ int launch_visu(t_corewar *corewar)
         if (input == 'q') break;
         else if (input == ' ') pause = pause == 1 ? 0 : 1;
         usleep(500);
+        timer.z += 1;
     }
     endwin(); free_visu_core(&core); return (0);
 }
