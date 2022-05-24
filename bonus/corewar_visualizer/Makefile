@@ -27,7 +27,7 @@ CC	=	cc
 
 RM	=	rm -rf
 
-CFLAGS	=	-g3 -O2 -Wall -Wextra -lncurses -lcsfml-audio
+CFLAGS	=	-O2 -Wall -Wextra -lncurses -lcsfml-audio
 
 $(NAME)	:	$(OBJ)
 	make -C lib/
