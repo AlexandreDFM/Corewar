@@ -35,7 +35,7 @@ int check_winner(t_corewar *corewar)
     t_list_champions *champion = corewar->champions;
     int winner = 0;
     while (champion) {
-        if (champion->infos[NB_LIVE] != 0) {
+        if (champion->infos[NB_LIVE] > 40) {
             winner = champion->infos[0];
             break;
         }
@@ -48,7 +48,7 @@ void detect_death(t_corewar *corewar)
 {
     t_list_champions *champion = corewar->champions;
     while (champion) {
-        if (champion->infos[NB_LIVE] == 0) {
+        if (champion->infos[NB_LIVE] < 40) {
             corewar->nbr_death++;
             corewar->one_death = 1;
         }

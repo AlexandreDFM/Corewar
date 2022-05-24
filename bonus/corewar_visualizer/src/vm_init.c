@@ -29,9 +29,8 @@ void pos_player(t_corewar *corewar)
         }
         champions->address = base;
         champions->infos[1] = champions->address;
-        for (int i = 0; i < champions->prog_size; i++)
-            corewar->arena->tab[champions->address + i] =
-                champions->command[i];
+        for (int i = 0; i <= champions->prog_size; i++)
+            corewar->arena->tab[champions->address + i] = champions->command[i];
         base += add;
         champions = champions->next;
     }

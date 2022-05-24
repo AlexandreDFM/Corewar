@@ -26,12 +26,24 @@ void my_print_timer(int rows, int cols, sfVector2i timer)
     }
 }
 
-void my_print_champ(sfVector2i coords, unsigned char *namechamp, vector3i infos)
+unsigned char *get_name_winner_player(t_list_champions *champions, int nb_player)
 {
-    mvwprintw(stdscr, coords.x, coords.y + 132, "%.14s", namechamp);
+    t_list_champions *tmp = champions;
+    while (tmp) {
+        if (tmp->infos[0] == nb_player)
+            return tmp->name;
+        tmp = tmp->next;
+    }
+    return NULL;
+}
+
+void my_print_champ(sfVector2i coords, unsigned char *namechamp, vector3i infos, int nb_player)
+{
+    mvwprintw(stdscr, coords.x, coords.y + 132, "%.14s [%d]", namechamp, nb_player);
     mvwprintw(stdscr, coords.x, coords.y + 147, "%d", infos.x);
     mvwprintw(stdscr, coords.x, coords.y + 159, "%d", infos.y);
-    mvwprintw(stdscr, coords.x, coords.y + 170, infos.z == 1 ? "    YES" : "    NO");
+    mvwprintw(stdscr, coords.x, coords.y + 170, infos.z == 0 ? "    YES" : "    NO");
+
 }
 
 void my_interface(t_corewar *corewar, t_visu_core *core, sfVector2i timer)
@@ -62,14 +74,14 @@ void my_interface(t_corewar *corewar, t_visu_core *core, sfVector2i timer)
     for (int j = 0, lines2 = 2, cols2 = 0; j < 6144; j++, cols2++) {
         if (j % 128 == 0) lines2 += 1, cols2 = 0;
         for (t_list_champions *champ = corewar->champions; champ != NULL; champ = champ->next) {
-            if (champ->infos[1] == j) {
-                int size = sizeof(champ->command) * 4;
-                mvwprintw(stdscr, 0, 0, "%d", size);
+            if ((int)champ->address == j) {
+                int size = sizeof(champ->command) * 3 - 1;
                 attron(COLOR_PAIR(5));
-                for (int u = 0; u < size; u++) {
-                    mvwprintw(stdscr, lines2, cols + cols2 + u, "c");
-                }
+                for (int u = 0; u < size; u++)
+                    mvwprintw(stdscr, lines2, cols + cols2 + u, "%x", champ->command[u]);
                 attroff(COLOR_PAIR(5));
+            }
+            if (champ->infos[1] == j) {
                 attron(COLOR_PAIR(4));
                 mvwprintw(stdscr, 0 + lines2, cols + cols2, " ");
                 attroff(COLOR_PAIR(4));
@@ -82,16 +94,22 @@ void my_interface(t_corewar *corewar, t_visu_core *core, sfVector2i timer)
     for (int i = 15, j = 0; champ != NULL; champ = champ->next, i += 2, j++) {
         // my_print_champ((sfVector2i) {rows + i, cols}, champ->name, (vector3i) {champ->number, champ->last_live, champ->alive});
         core->champions_infos[j] = (vector3i) {champ->infos[4], core->champions_infos[j].y, core->champions_infos[j].y};
-        my_print_champ((sfVector2i) {rows + i, cols}, champ->name, core->champions_infos[j]);
+        my_print_champ((sfVector2i) {rows + i, cols}, champ->name, core->champions_infos[j], champ->infos[0]);
     }
     my_print_timer(core->rows, core->cols, timer);
+    mvwprintw(stdscr, core->rows + 2, core->cols + 27, "Winner : ");
+    if (corewar->winner == 0)
+        mvwprintw(stdscr, core->rows + 2, core->cols + 37, "NONE");
+    else
+        mvwprintw(stdscr, core->rows + 2, core->cols + 37, "Player %d (%s)",
+            corewar->winner, get_name_winner_player(corewar->champions,
+                corewar->winner));
 }
 
 void time_gestionnary(t_corewar *corewar, int i, clock_t *clock1, clock_t *clock2, sfVector2i *timer)
 {
     *clock2 = clock();
     if (i == 1 && corewar->winner == 0) {
-        pos_player(corewar);
         if (corewar->arena->cycle_last_check == corewar->arena->cycle_to_die) {
             corewar->arena->cycle_last_check = 0;
             detect_death(corewar);
@@ -102,7 +120,7 @@ void time_gestionnary(t_corewar *corewar, int i, clock_t *clock1, clock_t *clock
         check_champions(corewar);
         corewar->arena->cycle_last_check++, corewar->arena->cycle++;
     }
-    if (((*clock2) - (*clock1)) / CLOCKS_PER_SEC > 1 ) {
+    if (((*clock2) - (*clock1)) / CLOCKS_PER_SEC > 1) {
         clear();
         refresh();
         *clock1 = clock();
@@ -124,7 +142,8 @@ void music_gestionnary(sfMusic *music1, sfMusic *music2)
 sfMusic *setup_music(char *pathmusic)
 {
     sfMusic *music = sfMusic_createFromFile(pathmusic);
-    sfMusic_setLoop(music, sfTrue); sfMusic_setVolume(music, 50);
+    sfMusic_setLoop(music, sfTrue);
+    sfMusic_setVolume(music, 50);
     sfMusic_setPitch(music, 1.5);
     return (music);
 }
@@ -179,11 +198,12 @@ int launch_visu(t_corewar *corewar)
     keypad(stdscr, TRUE); nodelay(stdscr, TRUE); start_color();
     init_pair(1, COLOR_BLACK, COLOR_WHITE);
     init_pair(2, COLOR_BLACK, COLOR_RED);
-    init_pair(3, COLOR_BLACK, COLOR_GREEN);
+    init_pair(3, COLOR_BLACK, COLOR_RED);
     init_pair(4, COLOR_BLACK, COLOR_BLUE);
     init_pair(5, COLOR_BLACK, COLOR_CYAN);
     int pause = 1, input = 0;
     sfVector2i timer = {0, 0}; sfVector2i trash = {0, 0};
+    pos_player(corewar);
     while (1) {
         if (COLS / 2 - core.cols / 2 - 30 < 0 || LINES / 2 - core.rows / 2 < 0) {
             clear();
@@ -201,6 +221,7 @@ int launch_visu(t_corewar *corewar)
         input = getch();
         if (input == 'q') break;
         else if (input == ' ') pause = pause == 1 ? 0 : 1;
+        usleep(500);
     }
     endwin(); free_visu_core(&core); return (0);
 }
